@@ -49,35 +49,67 @@ grammar IsiLang;
 	}
 }
 
-prog		: 'programa' declara bloco  'fimprog.'
-	           	{  	program.setVarTable(symbolTable);
-	           	  	program.setComandos(stack.pop()); 
-	           	} 
-			;
+prog	: 'programa' decl bloco  'fimprog;'
+           {  program.setVarTable(symbolTable);
+           	  program.setComandos(stack.pop());
+           	 
+           } 
+		;
 		
-declara     :  'declare' ID (VIR ID)* PR
-        	;
+decl    :  (declaravar)+
+        ;
         
-bloco		: { curThread = new ArrayList<AbstractCommand>(); 
-	        	stack.push(curThread);  
-          	  }
-          	  (cmd.)+
-			;
+        
+declaravar :  tipo ID  {
+	                  _varName = _input.LT(-1).getText();
+	                  _varValue = null;
+	                  symbol = new IsiVariable(_varName, _tipo, _varValue);
+	                  if (!symbolTable.exists(_varName)){
+	                     symbolTable.add(symbol);	
+	                  }
+	                  else{
+	                  	 throw new SemanticException("Symbol "+_varName+" already declared");
+	                  }
+                    } 
+              (  VIR 
+              	 ID {
+	                  _varName = _input.LT(-1).getText();
+	                  _varValue = null;
+	                  symbol = new IsiVariable(_varName, _tipo, _varValue);
+	                  if (!symbolTable.exists(_varName)){
+	                     symbolTable.add(symbol);	
+	                  }
+	                  else{
+	                  	 throw new SemanticException("Symbol "+_varName+" already declared");
+	                  }
+                    }
+              )* 
+               PR
+           ;
+           
+tipo       : 'numero' { _tipo = IsiVariable.NUMBER;  }
+           | 'texto'  { _tipo = IsiVariable.TEXT;  }
+           ;
+        
+bloco	: { curThread = new ArrayList<AbstractCommand>(); 
+	        stack.push(curThread);  
+          }
+          (cmd)+
+		;
 		
 
-cmd			:  cmdLeitura  
- 			|  cmdEscrita 
- 			|  cmdExpr
- 			|  cmdIf
- 			|  cmdEnquanto  
-			;
+cmd		:  cmdleitura  
+ 		|  cmdescrita 
+ 		|  cmdattrib
+ 		|  cmdselecao  
+		;
 		
-cmdLeitura	: 'leia' AP
+cmdleitura	: 'leia' AP
                      ID { verificaID(_input.LT(-1).getText());
                      	  _readID = _input.LT(-1).getText();
                         } 
                      FP 
-                     PR  
+                     PR 
               {
               	IsiVariable var = (IsiVariable)symbolTable.get(_readID);
               	CommandLeitura cmd = new CommandLeitura(_readID, var);
@@ -85,15 +117,12 @@ cmdLeitura	: 'leia' AP
               }   
 			;
 			
-cmdEscrita	: 'escreva' 
+cmdescrita	: 'escreva' 
                  AP 
-                 ( 
-                 	ID { 
-                 			verificaID(_input.LT(-1).getText());
-	                    	_writeID = _input.LT(-1).getText();
-                       }
-                 | 	TEXTO
-                 
+                 (	 TEXTO 
+	             |	 ID { verificaID(_input.LT(-1).getText());
+	                     	  _readID = _input.LT(-1).getText();
+	                    } 
                  ) 
                  FP 
                  PR
@@ -103,63 +132,66 @@ cmdEscrita	: 'escreva'
                }
 			;
 			
-cmdIf	  	:  'se' 	AP
-                    	expr  { _exprDecision = _input.LT(-1).getText(); }
-                    	OPREL { _exprDecision += _input.LT(-1).getText(); }
-                    	expr  { _exprDecision += _input.LT(-1).getText(); }
-                    	FP
-               'entao' 	ACH 
-                    	{ 
-                    		curThread = new ArrayList<AbstractCommand>(); 
-                      	  	stack.push(curThread);
-                    	}
-                    	(cmd)+ 
-                    	FCH 
-                    	{
-                       		listaTrue = stack.pop();	
-                    	} 
-              ('senao' 	ACH
-                   	 	{
-                   	 		curThread = new ArrayList<AbstractCommand>();
-                   	 		stack.push(curThread);
-                   	 	} 
-                   		(cmd+) 
-                   		FCH
-                   		{
-                   			listaFalse = stack.pop();
-                   			CommandDecisao cmd = new CommandDecisao(_exprDecision, listaTrue, listaFalse);
-                   			stack.peek().add(cmd);
-                   		}
-              )?
-            ;
-
-cmdExpr		:  ID { 
-						verificaID(_input.LT(-1).getText());
-                    	_exprID = _input.LT(-1).getText();
-                  } 
+cmdattrib	:  ID { verificaID(_input.LT(-1).getText());
+                    _exprID = _input.LT(-1).getText();
+                   } 
                ATR { _exprContent = ""; } 
                expr 
                PR
                {
-               	 	CommandAtribuicao cmd = new CommandAtribuicao(_exprID, _exprContent);
-               		stack.peek().add(cmd);
+               	 CommandAtribuicao cmd = new CommandAtribuicao(_exprID, _exprContent);
+               	 stack.peek().add(cmd);
                }
 			;
 			
-cmdEnquanto : 'enquanto' AP expr OPREL expr FP ACH (cmd)+ FCH
-			;
 			
-expr		: termo ( ( SOM | SUB) termo )*
-			;
-			
-termo		: fator ( ( MUL | DIV ) fator)*
-			;
-
-fator 		: NUMBER 
-            | ID 
-            | AP expr FP
+cmdselecao  :  'se' AP
+                    ID    { _exprDecision = _input.LT(-1).getText(); }
+                    OPREL { _exprDecision += _input.LT(-1).getText(); }
+                    (ID | NUMBER) {_exprDecision += _input.LT(-1).getText(); }
+                    FP 
+                    ACH 
+                    { curThread = new ArrayList<AbstractCommand>(); 
+                      stack.push(curThread);
+                    }
+                    (cmd)+ 
+                    
+                    FCH 
+                    {
+                       listaTrue = stack.pop();	
+                    } 
+                   ('senao' 
+                   	 ACH
+                   	 {
+                   	 	curThread = new ArrayList<AbstractCommand>();
+                   	 	stack.push(curThread);
+                   	 } 
+                   	(cmd+) 
+                   	FCH
+                   	{
+                   		listaFalse = stack.pop();
+                   		CommandDecisao cmd = new CommandDecisao(_exprDecision, listaTrue, listaFalse);
+                   		stack.peek().add(cmd);
+                   	}
+                   )?
             ;
-	 
+			
+expr		:  termo ( 
+	             OP  { _exprContent += _input.LT(-1).getText();}
+	            termo
+	            )*
+			;
+			
+termo		: ID { verificaID(_input.LT(-1).getText());
+	               _exprContent += _input.LT(-1).getText();
+                 } 
+            | 
+              NUMBER
+              {
+              	_exprContent += _input.LT(-1).getText();
+              }
+			;
+			
 OPREL 	: '>' | '<' | '>=' | '<=' | '==' | '!='
       	;
       
@@ -174,6 +206,9 @@ NUMBER	: [0-9]+ ('.' [0-9]+)?
 		
 WS		: (' ' | '\t' | '\n' | '\r') -> skip
 		;
+		
+OP	: '+' | '-' | '*' | '/'
+	;
 
 AP	: '('
 	;

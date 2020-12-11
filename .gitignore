@@ -4,3 +4,5 @@ antlr-4.7.1-complete.jar
 .project
 .settings/
 target
+input2.isi
+isiLang1.g4
