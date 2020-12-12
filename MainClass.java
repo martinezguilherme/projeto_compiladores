@@ -2,10 +2,10 @@ import java.util.Scanner;
 public class MainClass{ 
   public static void main(String args[]){
        Scanner _key = new Scanner(System.in);
-String  a;
+double  a;
 double  b;
-String  c;
-String  d;
+double  c;
+double  d;
 a= _key.nextFloat();
 b= _key.nextFloat();
 a = 1+2*3.3/b;
@@ -15,6 +15,8 @@ System.out.println(a);
 System.out.println("b");
 }
 
+while (a>b) {
 System.out.println("a");
+}
   }
 }
