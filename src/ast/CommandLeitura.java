@@ -11,11 +11,22 @@ public class CommandLeitura extends AbstractCommand {
 		this.id = id;
 		this.var = var;
 	}
+	
 	@Override
 	public String generateJavaCode() {
-		// TODO Auto-generated method stub
-		return id +"= _key." + (var.getType()==IsiVariable.NUMBER? "nextDouble();": "nextLine();");
+		String str;
+		
+		if(var.getType() == IsiVariable.INT) {
+			str = "nextInt();";
+		} else if (var.getType() == IsiVariable.TEXT) {
+			str = "nextLine();";
+		} else {
+			str = "nextFloat();";
+		}
+		
+		return id +"= _key." + str;
 	}
+	
 	@Override
 	public String toString() {
 		return "CommandLeitura [id=" + id + "]";

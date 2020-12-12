@@ -1,4 +1,6 @@
 package main;
+//java -cp antlr-4.7.1-complete.jar org.antlr.v4.Tool IsiLang.g4 -package parser -o ./src/parser/
+
 
 import parser.IsiLangLexer;
 import parser.IsiLangParser;

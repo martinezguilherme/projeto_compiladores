@@ -16,9 +16,9 @@ grammar IsiLang;
 }
 
 @members{
-	private int _tipo;
 	private String _varName;
 	private String _varValue;
+	private int _varType;
 	private IsiSymbolTable symbolTable = new IsiSymbolTable();
 	private IsiSymbol symbol;
 	private GenerateJavaCode program = new GenerateJavaCode();
@@ -49,33 +49,31 @@ grammar IsiLang;
 	}
 }
 
-prog	: 'programa' decl bloco  'fimprog;'
-           {  
-           	  program.setVarTable(symbolTable);
-           	  program.setComandos(stack.pop());   	 
-           } 
-		;
+prog		: 'programa' declara bloco 'fimprog;'
+	           {  
+	           	  program.setVarTable(symbolTable);
+	           	  program.setComandos(stack.pop());   	 
+	           } 
+			;
 		
-decl    :  (declaravar)+
-        ;
-        
-        
-declaravar :  tipo ID  {
+declara    :  'declare'  ID  {
 	                  		_varName = _input.LT(-1).getText();
 	                  		_varValue = null;
-	                  		symbol = new IsiVariable(_varName, _tipo, _varValue);
+	                  		_varType = 0;
+	                  		symbol = new IsiVariable(_varName, _varValue, _varType);
 	                  		if (!symbolTable.exists(_varName)){
 	                     		symbolTable.add(symbol);	
 	                  		}
 	                  		else{
 	                  	 		throw new SemanticException("Symbol "+_varName+" already declared");
-	                  		}
-                    	} 
+	                  	  	}
+                    	  } 
                    (  VIR 
               	 	  ID {
 	                  		_varName = _input.LT(-1).getText();
 	                  		_varValue = null;
-	                  		symbol = new IsiVariable(_varName, _tipo, _varValue);
+	                  		_varType = 0;
+	                  		symbol = new IsiVariable(_varName, _varValue, _varType = 0);
 	                  		if (!symbolTable.exists(_varName)){
 	                     		symbolTable.add(symbol);	
 	                  		}
@@ -85,10 +83,6 @@ declaravar :  tipo ID  {
                      	  }
               		)* 
               		PR
-           ;
-           
-tipo       : 'numero' { _tipo = IsiVariable.NUMBER;  }
-           | 'texto'  { _tipo = IsiVariable.TEXT;  }
            ;
         
 bloco	: { 
@@ -183,26 +177,28 @@ cmdenquanto : 'enquanto' AP expr OPREL expr FP ACH (cmd)+ FCH
 			
 expr		: termo 
 			  ( 
-	          	OP  { _exprContent += _input.LT(-1).getText();}
-	          termo
+	          		OP  { _exprContent += _input.LT(-1).getText();}
+	            	termo
 	          )*
 			;
 			
 termo		: fator 
 			  (
-			  	OP { _exprContent += _input.LT(-1).getText();}
-			  	fator
+			  		OP { _exprContent += _input.LT(-1).getText();}
+			  		fator
 			  )*
 			;
 			
 fator 		: NUMBER {
               			_exprContent += _input.LT(-1).getText();
+              			IsiVariable var = (IsiVariable)symbolTable.get(_readID);
+              			var.setType(_input.LT(-1).getText());
               		 }
-            | ID { 
-            		verificaID(_input.LT(-1).getText());
-	                _exprContent += _input.LT(-1).getText();
-                 } 
-            | AP expr FP
+              | ID 	 { 
+            			verificaID(_input.LT(-1).getText());
+	                	_exprContent += _input.LT(-1).getText();
+                     } 
+              | AP expr FP
             ;
 			
 OPREL 	: '>' | '<' | '>=' | '<=' | '==' | '!='
