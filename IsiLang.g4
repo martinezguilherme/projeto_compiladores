@@ -51,7 +51,7 @@ grammar IsiLang;
 	}
 }
 
-prog		: 'programa' declara bloco 'fimprog;'
+prog		: 'programa' declara bloco 'fimprog.'
 	           {  
 	           	  program.setVarTable(symbolTable);
 	           	  program.setComandos(stack.pop());   	 

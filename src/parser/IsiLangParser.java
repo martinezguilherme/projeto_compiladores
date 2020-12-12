@@ -44,7 +44,7 @@ public class IsiLangParser extends Parser {
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, "'programa'", "'fimprog;'", "'declare'", "'leia'", "'escreva'", 
+		null, "'programa'", "'fimprog.'", "'declare'", "'leia'", "'escreva'", 
 		"'se'", "'entao'", "'senao'", "'enquanto'", null, null, null, null, null, 
 		null, "'('", "')'", "'.'", "'\"'", "':='", "','", "'{'", "'}'", "'+'", 
 		"'*'", "'/'", "'-'"

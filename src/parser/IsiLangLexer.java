@@ -49,7 +49,7 @@ public class IsiLangLexer extends Lexer {
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, "'programa'", "'fimprog;'", "'declare'", "'leia'", "'escreva'", 
+		null, "'programa'", "'fimprog.'", "'declare'", "'leia'", "'escreva'", 
 		"'se'", "'entao'", "'senao'", "'enquanto'", null, null, null, null, null, 
 		null, "'('", "')'", "'.'", "'\"'", "':='", "','", "'{'", "'}'", "'+'", 
 		"'*'", "'/'", "'-'"
@@ -181,9 +181,9 @@ public class IsiLangLexer extends Lexer {
 		"\3\2\2\2+\u00b3\3\2\2\2-\u00b5\3\2\2\2/\u00b7\3\2\2\2\61\u00b9\3\2\2\2"+
 		"\63\u00bb\3\2\2\2\65\u00bd\3\2\2\2\67\u00bf\3\2\2\29:\7r\2\2:;\7t\2\2"+
 		";<\7q\2\2<=\7i\2\2=>\7t\2\2>?\7c\2\2?@\7o\2\2@A\7c\2\2A\4\3\2\2\2BC\7"+
-		"h\2\2CD\7k\2\2DE\7o\2\2EF\7r\2\2FG\7t\2\2GH\7q\2\2HI\7i\2\2IJ\7=\2\2J"+
-		"\6\3\2\2\2KL\7f\2\2LM\7g\2\2MN\7e\2\2NO\7n\2\2OP\7c\2\2PQ\7t\2\2QR\7g"+
-		"\2\2R\b\3\2\2\2ST\7n\2\2TU\7g\2\2UV\7k\2\2VW\7c\2\2W\n\3\2\2\2XY\7g\2"+
+		"h\2\2CD\7k\2\2DE\7o\2\2EF\7r\2\2FG\7t\2\2GH\7q\2\2HI\7i\2\2IJ\7\60\2\2"+
+		"J\6\3\2\2\2KL\7f\2\2LM\7g\2\2MN\7e\2\2NO\7n\2\2OP\7c\2\2PQ\7t\2\2QR\7"+
+		"g\2\2R\b\3\2\2\2ST\7n\2\2TU\7g\2\2UV\7k\2\2VW\7c\2\2W\n\3\2\2\2XY\7g\2"+
 		"\2YZ\7u\2\2Z[\7e\2\2[\\\7t\2\2\\]\7g\2\2]^\7x\2\2^_\7c\2\2_\f\3\2\2\2"+
 		"`a\7u\2\2ab\7g\2\2b\16\3\2\2\2cd\7g\2\2de\7p\2\2ef\7v\2\2fg\7c\2\2gh\7"+
 		"q\2\2h\20\3\2\2\2ij\7u\2\2jk\7g\2\2kl\7p\2\2lm\7c\2\2mn\7q\2\2n\22\3\2"+
