@@ -11,6 +11,7 @@ grammar IsiLang;
 	import ast.CommandEscrita;
 	import ast.CommandAtribuicao;
 	import ast.CommandDecisao;
+	import ast.CommandEnquanto;
 	import java.util.ArrayList;
 	import java.util.Stack;
 }
@@ -31,6 +32,7 @@ grammar IsiLang;
 	private String _exprID;
 	private String _exprContent;
 	private String _exprDecision;
+	private String _exprEnquanto;
 	private ArrayList<AbstractCommand> listaTrue;
 	private ArrayList<AbstractCommand> listaFalse;
 	
@@ -177,7 +179,23 @@ cmdselecao  :  'se' 	AP
                )?
             ;
         
-cmdenquanto : 'enquanto' AP expr OPREL expr FP ACH (cmd)+ FCH
+cmdenquanto : 'enquanto' AP 
+						expr { _exprEnquanto = _input.LT(-1).getText(); }
+						OPREL { _exprEnquanto += _input.LT(-1).getText(); }
+						expr { _exprEnquanto += _input.LT(-1).getText(); }
+						FP 
+						ACH 
+                    	{ 
+                    		curThread = new ArrayList<AbstractCommand>(); 
+                      		stack.push(curThread);
+                    	}
+                    	(cmd)+ 
+                    	FCH 
+                    	{
+                       		listaTrue = stack.pop();	
+							CommandEnquanto cmd = new CommandEnquanto(_exprEnquanto, listaTrue);
+                   			stack.peek().add(cmd);
+                    	} 
 			;
 			
 expr		: termo 

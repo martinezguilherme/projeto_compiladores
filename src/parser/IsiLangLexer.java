@@ -11,6 +11,7 @@ package parser;
 	import ast.CommandEscrita;
 	import ast.CommandAtribuicao;
 	import ast.CommandDecisao;
+	import ast.CommandEnquanto;
 	import java.util.ArrayList;
 	import java.util.Stack;
 
@@ -108,6 +109,7 @@ public class IsiLangLexer extends Lexer {
 		private String _exprID;
 		private String _exprContent;
 		private String _exprDecision;
+		private String _exprEnquanto;
 		private ArrayList<AbstractCommand> listaTrue;
 		private ArrayList<AbstractCommand> listaFalse;
 		

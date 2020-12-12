@@ -11,6 +11,7 @@ package parser;
 	import ast.CommandEscrita;
 	import ast.CommandAtribuicao;
 	import ast.CommandDecisao;
+	import ast.CommandEnquanto;
 	import java.util.ArrayList;
 	import java.util.Stack;
 
