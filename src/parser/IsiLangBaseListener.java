@@ -126,13 +126,13 @@ public class IsiLangBaseListener implements IsiLangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCmdattrib(IsiLangParser.CmdattribContext ctx) { }
+	@Override public void enterCmdexpr(IsiLangParser.CmdexprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCmdattrib(IsiLangParser.CmdattribContext ctx) { }
+	@Override public void exitCmdexpr(IsiLangParser.CmdexprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -145,6 +145,18 @@ public class IsiLangBaseListener implements IsiLangListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCmdselecao(IsiLangParser.CmdselecaoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCmdenquanto(IsiLangParser.CmdenquantoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCmdenquanto(IsiLangParser.CmdenquantoContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -169,6 +181,18 @@ public class IsiLangBaseListener implements IsiLangListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTermo(IsiLangParser.TermoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFator(IsiLangParser.FatorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFator(IsiLangParser.FatorContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
