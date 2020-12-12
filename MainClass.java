@@ -10,11 +10,11 @@ a= _key.nextFloat();
 b= _key.nextFloat();
 a = 1+2*3.3/b;
 if (a>b) {
-System.out.println(a)
+System.out.println(a);
 } else {
-System.out.println("b")
+System.out.println("b");
 }
 
-System.out.println("a")
+System.out.println("a");
   }
 }
