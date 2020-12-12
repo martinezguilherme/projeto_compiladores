@@ -54,11 +54,11 @@ public class IsiVariable extends IsiSymbol {
        if (type == INT) {
     	   str = "int ";
        }
-       else if(type == DOUBLE) {
-    	   str = "double ";
+       else if(type == TEXT) {
+    	   str = "String ";
        }
        else {
-    	   str = "String ";
+    	   str = "double ";
        }
        return str + " "+super.name+";";
 	}
