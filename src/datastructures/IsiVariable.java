@@ -3,7 +3,7 @@ package datastructures;
 public class IsiVariable extends IsiSymbol {
 	
 	public static final int INT = 2;
-	public static final int FLOAT  = 3;
+	public static final int DOUBLE  = 3;
 	public static final int TEXT   = 1;
 	
 	private int type;
@@ -26,8 +26,8 @@ public class IsiVariable extends IsiSymbol {
 		} catch(NumberFormatException nfe) {				
 			this.type = TEXT;
 			try {
-				Float.parseFloat(type);
-				this.type = FLOAT;
+				Double.parseDouble(type);
+				this.type = DOUBLE;
 			} catch(NumberFormatException nfe1) {				
 				this.type = TEXT;
 				
@@ -49,34 +49,17 @@ public class IsiVariable extends IsiSymbol {
 		return "IsiVariable [name=" + name + ", type=" + type + ", value=" + value + "]";
 	}
 	
-//	public int indentifyType (String value) {
-//		int x = 9;
-//		if (value!=null) {
-//			try {
-//				x =Integer.parseInt(value);
-//				
-//				//type = NUMBER;
-//			} catch(NumberFormatException nfe) {				
-//				//type = TEXT;
-//			}
-//		}
-//		
-//		System.out.println(x);
-//		
-//		return "type";
-//	}
-//	
 	public String generateJavaCode() {
-       String str="a";
-//       if (type == NUMBER) {
-//    	   str = "double ";
-//       }
-//       else if(type == FLOAT) {
-//    	   str = "float ";
-//       }
-//       else {
-//    	   str = "String ";
-//       }
+       String str;
+       if (type == INT) {
+    	   str = "int ";
+       }
+       else if(type == DOUBLE) {
+    	   str = "double ";
+       }
+       else {
+    	   str = "String ";
+       }
        return str + " "+super.name+";";
 	}
 	

@@ -103,6 +103,8 @@ public class IsiLangLexer extends Lexer {
 		private Stack<ArrayList<AbstractCommand>> stack = new Stack<ArrayList<AbstractCommand>>();
 		private String _readID;
 		private String _writeID;
+		private String _readTEXTO;
+		private String _writeTEXTO;
 		private String _exprID;
 		private String _exprContent;
 		private String _exprDecision;

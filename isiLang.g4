@@ -26,6 +26,8 @@ grammar IsiLang;
 	private Stack<ArrayList<AbstractCommand>> stack = new Stack<ArrayList<AbstractCommand>>();
 	private String _readID;
 	private String _writeID;
+	private String _readTEXTO;
+	private String _writeTEXTO;
 	private String _exprID;
 	private String _exprContent;
 	private String _exprDecision;
@@ -115,16 +117,19 @@ cmdleitura	: 'leia' AP
 			;
 			
 cmdescrita	: 'escreva' AP 
-                 		(	 TEXTO 
-	             		|	 ID { 
-	             					verificaID(_input.LT(-1).getText());
-	                     	  		_readID = _input.LT(-1).getText();
-	                    		} 
+                 		(	 TEXTO 	{
+                 						_writeID = null;
+                 						_writeTEXTO = _input.LT(-1).getText();
+                 				   	}
+	             		|	 ID 	{ 
+	             						verificaID(_input.LT(-1).getText());
+	                     	  			_writeID = _input.LT(-1).getText();
+	                    			} 
                  		) 
                  		FP 
                  		PR
                			{
-               	  			CommandEscrita cmd = new CommandEscrita(_writeID);
+               	  			CommandEscrita cmd = new CommandEscrita(_writeID, _writeTEXTO);
                	  			stack.peek().add(cmd);
                			}
 			;

@@ -3,18 +3,22 @@ package ast;
 public class CommandEscrita extends AbstractCommand {
 
 	private String id;
+	private String texto;
 	
-	public CommandEscrita(String id) {
+	public CommandEscrita(String id, String texto) {
 		this.id = id;
+		this.texto = texto;
 	}
+	
 	@Override
 	public String generateJavaCode() {
-		// TODO Auto-generated method stub
-		return "System.out.println("+id+");";
+		String str = (id == null)? texto : id; 
+		return "System.out.println("+str+")";
 	}
+	
 	@Override
 	public String toString() {
-		return "CommandEscrita [id=" + id + "]";
+		return "CommandEscrita [id=" + id + " texto="+texto+"]";
 	}
 	
 }
