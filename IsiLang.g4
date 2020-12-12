@@ -53,7 +53,7 @@ grammar IsiLang;
 	}
 }
 
-prog		: 'programa' declara bloco 'fimprog.'
+prog		: 'programa' (declara|texto)+ bloco 'fimprog.'
 	           {  
 	           	  program.setVarTable(symbolTable);
 	           	  program.setComandos(stack.pop());   	 
@@ -89,6 +89,35 @@ declara    :  'declare'  ID  {
               		PR
            ;
         
+texto    :  'texto'  ID  {
+	                  		_varName = _input.LT(-1).getText();
+	                  		_varValue = null;
+	                  		_varType = 1;
+	                  		symbol = new IsiVariable(_varName, _varValue, _varType);
+	                  		if (!symbolTable.exists(_varName)){
+	                     		symbolTable.add(symbol);	
+	                  		}
+	                  		else{
+	                  	 		throw new SemanticException("Symbol "+_varName+" already declared");
+	                  	  	}
+                    	  } 
+                   (  VIR 
+              	 	  ID {
+	                  		_varName = _input.LT(-1).getText();
+	                  		_varValue = null;
+	                  		_varType = 1;
+	                  		symbol = new IsiVariable(_varName, _varValue, _varType);
+	                  		if (!symbolTable.exists(_varName)){
+	                     		symbolTable.add(symbol);	
+	                  		}
+	                  		else{
+	                  	 		throw new SemanticException("Symbol "+_varName+" already declared");
+	                  		}
+                     	  }
+              		)* 
+              		PR
+           ;
+
 bloco	: { 
 		       curThread = new ArrayList<AbstractCommand>(); 
 	           stack.push(curThread);  

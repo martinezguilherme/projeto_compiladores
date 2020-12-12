@@ -1,10 +1,11 @@
 programa
 
   declare a, b, c, d.
+  texto palavra, bota.
 
   leia(a).
   leia(b).
- 
+  
   a := 1 + 2 * 3.3 / b.
   
   se ( a > b ) entao {

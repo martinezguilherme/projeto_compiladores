@@ -21,16 +21,15 @@ public class IsiVariable extends IsiSymbol {
 
 	public void setType(String type) {
 		try {
+			System.out.println(type);
 			Integer.parseInt(type);
 			this.type = INT;
 		} catch(NumberFormatException nfe) {				
-			this.type = TEXT;
 			try {
 				Double.parseDouble(type);
 				this.type = DOUBLE;
 			} catch(NumberFormatException nfe1) {				
 				this.type = TEXT;
-				
 			}
 		}
 		System.out.println(type+" "+this.type);

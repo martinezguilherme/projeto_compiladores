@@ -2,10 +2,12 @@ import java.util.Scanner;
 public class MainClass{ 
   public static void main(String args[]){
        Scanner _key = new Scanner(System.in);
+String  palavra;
 double  a;
 double  b;
 double  c;
 double  d;
+String  bota;
 a= _key.nextFloat();
 b= _key.nextFloat();
 a = 1+2*3.3/b;
