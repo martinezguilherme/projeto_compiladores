@@ -601,7 +601,6 @@ public class IsiLangParser extends Parser {
 
 			              	IsiVariable var = (IsiVariable)symbolTable.get(_readID);
 			              	CommandLeitura cmd = new CommandLeitura(_readID, var);
-							variavelUti(_readID);
 			              	stack.peek().add(cmd);
 			              
 			}
@@ -667,6 +666,7 @@ public class IsiLangParser extends Parser {
 				 
 					             						verificaID(_input.LT(-1).getText());
 					                     	  			_writeID = _input.LT(-1).getText();
+														variavelUti(_writeID);
 					                    			
 				}
 				break;

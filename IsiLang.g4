@@ -147,7 +147,6 @@ cmdleitura	: 'leia' AP
               {
               	IsiVariable var = (IsiVariable)symbolTable.get(_readID);
               	CommandLeitura cmd = new CommandLeitura(_readID, var);
-				variavelUti(_readID);
               	stack.peek().add(cmd);
               }   
 			;
@@ -160,6 +159,7 @@ cmdescrita	: 'escreva' AP
 	             		|	 ID 	{ 
 	             						verificaID(_input.LT(-1).getText());
 	                     	  			_writeID = _input.LT(-1).getText();
+										variavelUti(_writeID);
 	                    			} 
                  		) 
                  		FP 
