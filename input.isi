@@ -6,6 +6,7 @@ programa
   leia(a).
   leia(b).
   
+  bota := "ovo".
   a := 1 + 2 * 3.3 / b.
   
   se ( a > b ) entao {

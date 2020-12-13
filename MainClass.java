@@ -10,6 +10,7 @@ double  d;
 String  bota;
 a= _key.nextFloat();
 b= _key.nextFloat();
+bota = "ovo";
 a = 1+2*3.3/b;
 if (a>b) {
 System.out.println(a);

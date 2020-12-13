@@ -246,10 +246,15 @@ fator 		: NUMBER {
               			IsiVariable var = (IsiVariable)symbolTable.get(_readID);
               			var.setType(_input.LT(-1).getText());
               		 }
-              | ID 	 { 
+             | ID 	 { 
             			verificaID(_input.LT(-1).getText());
 	                	_exprContent += _input.LT(-1).getText();
                      } 
+             | TEXTO {
+              			_exprContent += _input.LT(-1).getText();
+              			IsiVariable var = (IsiVariable)symbolTable.get(_readID);
+              			var.setType(_input.LT(-1).getText());
+              		 }
               | AP expr FP
             ;
 			
