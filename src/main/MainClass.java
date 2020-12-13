@@ -18,7 +18,7 @@ public class MainClass {
 			IsiLangLexer lexer;
 			IsiLangParser parser;
 			
-			// leio o arquivo "input.isi" e isso é entrada para o Analisador Lexico
+			// leio o arquivo "input.isi" e isso ï¿½ entrada para o Analisador Lexico
 			lexer = new IsiLangLexer(CharStreams.fromFileName("input.isi"));
 			
 			// crio um "fluxo de tokens" para passar para o PARSER
@@ -29,12 +29,11 @@ public class MainClass {
 			
 			parser.prog();
 			
-			System.out.println("Compilation Successful");
-			
 			parser.exibeComandos();
 			
 			parser.generateCode();
 			
+			System.out.println("Compilation Successful");
 		}
 		catch(SemanticException ex) {
 			System.err.println("Semantic error - "+ex.getMessage());

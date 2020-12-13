@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import datastructures.IsiSymbol;
 import datastructures.IsiSymbolTable;
+import exceptions.SemanticException;
 
 public class GenerateJavaCode {
 	private IsiSymbolTable varTable;
@@ -22,7 +23,9 @@ public class GenerateJavaCode {
 		
 		for (IsiSymbol symbol: varTable.getAll()) {
 			if(symbol.qtdUsos == 0)
-			System.out.println("Variável não utilizada:" + symbol.getName());
+				throw new SemanticException("Variável '"+ symbol.getName() + "' declarada mas não utilizada");
+			//System.out.println("Variável não utilizada:" + symbol.getName());
+
 			str.append(symbol.generateJavaCode()+"\n");
 		}
 		
