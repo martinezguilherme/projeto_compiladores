@@ -67,7 +67,7 @@ prog		: 'programa' (declara|texto)+ bloco 'fimprog.'
 declara    :  'declare'  ID  {
 	                  		_varName = _input.LT(-1).getText();
 	                  		_varValue = null;
-	                  		_varType = 0;
+	                  		_varType = 2;
 	                  		symbol = new IsiVariable(_varName, _varValue, _varType);
 	                  		if (!symbolTable.exists(_varName)){
 	                     		symbolTable.add(symbol);	
@@ -80,8 +80,8 @@ declara    :  'declare'  ID  {
               	 	  ID {
 	                  		_varName = _input.LT(-1).getText();
 	                  		_varValue = null;
-	                  		_varType = 0;
-	                  		symbol = new IsiVariable(_varName, _varValue, _varType = 0);
+	                  		_varType = 2;
+	                  		symbol = new IsiVariable(_varName, _varValue, _varType);
 	                  		if (!symbolTable.exists(_varName)){
 	                     		symbolTable.add(symbol);	
 	                  		}
@@ -259,11 +259,9 @@ fator 		: NUMBER {
                      } 
              | TEXTO {
               			_exprContent += _input.LT(-1).getText();
-              			IsiVariable var = (IsiVariable)symbolTable.get(_readID);
-              			var.setType(_input.LT(-1).getText());
               		 }
-              | AP expr FP
-            ;
+             | AP expr FP
+             ;
 			
 OPREL 	: '>' | '<' | '>=' | '<=' | '==' | '!='
       	;

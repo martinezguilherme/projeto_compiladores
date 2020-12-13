@@ -271,7 +271,7 @@ public class IsiLangParser extends Parser {
 
 				                  		_varName = _input.LT(-1).getText();
 				                  		_varValue = null;
-				                  		_varType = 0;
+				                  		_varType = 2;
 				                  		symbol = new IsiVariable(_varName, _varValue, _varType);
 				                  		if (!symbolTable.exists(_varName)){
 				                     		symbolTable.add(symbol);	
@@ -293,8 +293,8 @@ public class IsiLangParser extends Parser {
 
 					                  		_varName = _input.LT(-1).getText();
 					                  		_varValue = null;
-					                  		_varType = 0;
-					                  		symbol = new IsiVariable(_varName, _varValue, _varType = 0);
+					                  		_varType = 2;
+					                  		symbol = new IsiVariable(_varName, _varValue, _varType);
 					                  		if (!symbolTable.exists(_varName)){
 					                     		symbolTable.add(symbol);	
 					                  		}
@@ -1176,8 +1176,6 @@ public class IsiLangParser extends Parser {
 				match(TEXTO);
 
 				              			_exprContent += _input.LT(-1).getText();
-				              			IsiVariable var = (IsiVariable)symbolTable.get(_readID);
-				              			var.setType(_input.LT(-1).getText());
 				              		 
 				}
 				break;
