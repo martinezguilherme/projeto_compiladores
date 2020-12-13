@@ -3,15 +3,17 @@ public class MainClass{
   public static void main(String args[]){
        Scanner _key = new Scanner(System.in);
 String  palavra;
-double  a;
-double  b;
-double  c;
-double  d;
+int  a;
+int  b;
+int  c;
+int  d;
 String  bota;
-a= _key.nextFloat();
-b= _key.nextFloat();
+bota= _key.nextLine();
+b= _key.nextInt();
+palavra= _key.nextLine();
+a= _key.nextInt();
 bota = "ovo";
-a = 1+2*3.3/b;
+a = 1+2*3/b;
 if (a>b) {
 System.out.println(a);
 } else {
