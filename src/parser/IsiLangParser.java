@@ -132,6 +132,10 @@ public class IsiLangParser extends Parser {
 				System.out.println(c);
 			}
 		}
+
+		public void variavelUti(String id){ 
+			symbolTable.varUtilizada(id);
+		 }
 		
 		public void generateCode(){
 			program.generateTarget();
@@ -597,6 +601,7 @@ public class IsiLangParser extends Parser {
 
 			              	IsiVariable var = (IsiVariable)symbolTable.get(_readID);
 			              	CommandLeitura cmd = new CommandLeitura(_readID, var);
+							variavelUti(_readID);
 			              	stack.peek().add(cmd);
 			              
 			}
@@ -731,6 +736,7 @@ public class IsiLangParser extends Parser {
 			match(PR);
 
 			               	 	CommandAtribuicao cmd = new CommandAtribuicao(_exprID, _exprContent);
+								// variavelUti(_exprID);
 			               	 	stack.peek().add(cmd);
 			               
 			}
@@ -1158,6 +1164,7 @@ public class IsiLangParser extends Parser {
 				match(ID);
 				 
 				            			verificaID(_input.LT(-1).getText());
+										variavelUti(_input.LT(-1).getText());
 					                	_exprContent += _input.LT(-1).getText();
 				                     
 				}

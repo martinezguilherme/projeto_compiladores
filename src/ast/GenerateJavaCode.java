@@ -21,6 +21,8 @@ public class GenerateJavaCode {
 		str.append("      Scanner _key = new Scanner(System.in);\n");
 		
 		for (IsiSymbol symbol: varTable.getAll()) {
+			if(symbol.qtdUsos == 0)
+			System.out.println("Variável não utilizada:" + symbol.getName());
 			str.append(symbol.generateJavaCode()+"\n");
 		}
 		
