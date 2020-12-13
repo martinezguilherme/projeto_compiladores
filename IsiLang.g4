@@ -186,8 +186,8 @@ cmdexpr		:  ID {
 			
 cmdselecao  :  'se' 	AP
                     	expr    { _exprDecision = _input.LT(-1).getText(); }
-                    	OPREL { _exprDecision += _input.LT(-1).getText(); }
-                    	expr { _exprDecision += _input.LT(-1).getText(); }
+                    	OPREL 	{ _exprDecision += _input.LT(-1).getText(); }
+                    	expr 	{ _exprDecision += _input.LT(-1).getText(); }
                     	FP
                'entao'  ACH 
                     	{ 
@@ -208,16 +208,18 @@ cmdselecao  :  'se' 	AP
                    		FCH
                    		{
                    			listaFalse = stack.pop();
-                   			CommandDecisao cmd = new CommandDecisao(_exprDecision, listaTrue, listaFalse);
-                   			stack.peek().add(cmd);
                    		}
                )?
+               {
+               		CommandDecisao cmd = new CommandDecisao(_exprDecision, listaTrue, listaFalse);
+                   	stack.peek().add(cmd);
+               }
             ;
         
 cmdenquanto : 'enquanto' AP 
-						expr { _exprEnquanto = _input.LT(-1).getText(); }
-						OPREL { _exprEnquanto += _input.LT(-1).getText(); }
-						expr { _exprEnquanto += _input.LT(-1).getText(); }
+						expr 	{ _exprEnquanto = _input.LT(-1).getText(); }
+						OPREL 	{ _exprEnquanto += _input.LT(-1).getText(); }
+						expr 	{ _exprEnquanto += _input.LT(-1).getText(); }
 						FP 
 						ACH 
                     	{ 

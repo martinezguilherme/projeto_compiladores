@@ -1,22 +1,14 @@
 programa
 
-  declare a, b, c, d.
-  texto palavra, bota.
+  declare a, b.
 
-  leia(bota).
   leia(b).
-  leia(palavra).
   leia(a).
 
-
-  bota := "ovo".
   a := 1 + 2 * 3 / b. 
   
   se ( a > b ) entao {
      escreva (a).
-  }
-  senao {
-     escreva ("b").
   }
   
   enquanto ( a > b) {
