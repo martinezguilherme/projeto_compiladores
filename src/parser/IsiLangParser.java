@@ -859,6 +859,7 @@ public class IsiLangParser extends Parser {
 			match(ID);
 			 
 									verificaID(exibeInput());
+									_readID = exibeInput();
 			                    	_exprID = exibeInput();
 			                  
 			setState(120);
@@ -1412,8 +1413,10 @@ public class IsiLangParser extends Parser {
 				setState(219);
 				match(NUMBER);
 
+										System.out.println(exibeInput());
 				              			_exprContent += exibeInput();
 				              			IsiVariable var = (IsiVariable)symbolTable.get(_readID);
+										System.out.println(exibeInput());
 				              			var.setType(exibeInput());
 				              		 
 				}

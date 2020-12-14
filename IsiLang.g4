@@ -214,6 +214,7 @@ cmdescrita	: 'escreva' AP
 			
 cmdexpr		:  ID { 
 						verificaID(exibeInput());
+						_readID = exibeInput();
                     	_exprID = exibeInput();
                   } 
                ATR { _exprContent = ""; } 
@@ -323,8 +324,10 @@ termo		: fator
 			;
 			
 fator 		: NUMBER {
+						System.out.println(exibeInput());
               			_exprContent += exibeInput();
               			IsiVariable var = (IsiVariable)symbolTable.get(_readID);
+						System.out.println(exibeInput());
               			var.setType(exibeInput());
               		 }
              | ID 	 { 

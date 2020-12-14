@@ -2,53 +2,36 @@ programa
   
   declare a, b, c.
   texto palavra, teste1, teste2.
-  declarab boolTeste, boolInput.
-  # Comentarios 123 #
-  
+  declarab boolTeste.
   
   #Parte do numeros#
   escreva("digite o valor de a ").
-  leia(a).
+  a := 5.5.
   escreva("digite o valor de b ").
   leia(b).
+
   
   #Operador ternario#
-  escreva(" ").
-  escreva("Se a maior que b").
-  escreva("c eh 10 caso contrario c eh 20").
   c := a > b ? 10 : 20.
-  escreva(" ").
-  escreva("testando operador ternario").
-  escreva("c igual a").
   escreva(c).
 
-
-  a := 1 + 2 * 3 / b.
+  a := a*a.
   
-  # Aqui tem um comando de decisao #
-  escreva(" ").
-  escreva("Testando se senao ").
+  #comando de decisao#
   se ( a > b ) entao {
-    escreva("escrevendo a ").
     escreva (a).
   }
   senao {
-  	escreva("escrevendo b ").
   	escreva (b).
   }
   
-  escreva(" ").
-  escreva("Testando enquanto ").
+  #comando de enquanto#
   enquanto ( a > b) {
-    escreva ("escrevendo a ").
-	escreva (a).
     a := a - 1.
   }
   
   #Parte de texto#
-  escreva(" ").
   escreva("digite uma palavra ").
-  leia(palavra).
   leia(palavra).
   
   escreva("palavra escrita ").
@@ -58,7 +41,6 @@ programa
   escreva(palavra).
 
  #Parte do booleanos#
-  escreva(" ").
   teste1 := "Verdadeiro".
   teste2 := "Falso".
   boolTeste := True.
@@ -70,12 +52,6 @@ programa
   	escreva(teste2).
     escreva(boolTeste).
   }
-  
-  escreva("digite um valor booleano True ou False").
-  leia(boolInput).
-
-  escreva("escrevendo booleando ").
-  escreva(boolInput).
   
   # Acabou #
 fimprog.
