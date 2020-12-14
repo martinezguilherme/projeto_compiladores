@@ -1,31 +1,64 @@
 programa
   
   declare a, b.
-  texto palavra.
-
+  texto palavra, teste1, teste2.
+  declarab boolTeste, boolInput.
   # Comentarios 123 #
-
-  leia(b).
+  
+  
+  #Parte do numeros#
+  escreva("digite o valor de a ").
   leia(a).
-  leia(palavra).
-
-  a := 1 + 2 * 3 / b. 
+  escreva("digite o valor de b ").
+  leia(b).
+  
+  a := 1 + 2 * 3 / b.
   
   # Aqui tem um comando de decisao #
   se ( a > b ) entao {
-     escreva (a).
+    escreva("escrevendo a ").
+    escreva (a).
   }
   senao {
-  	 escreva (b).
+  	escreva("escrevendo b ").
+  	escreva (b).
   }
   
+   enquanto ( a > b) {
+    escreva ("escrevendo a ").
+	escreva (a).
+    a := a - 1.
+  }
   
-  palavra := "abracadabra".
+  #Parte de texto#
+  escreva("digite uma palavra ").
+  leia(palavra).
+  leia(palavra).
+  
+  escreva("palavra escrita ").
   escreva(palavra).
-  
-  enquanto ( a > b) {
-  	 escreva ("a").
+  palavra := "abracadabra".
+  escreva("palavra alterada ").
+  escreva(palavra).
+
+ #Parte do booleanos#
+  teste1 := "Verdadeiro".
+  teste2 := "Falso".
+  boolTeste := True.
+
+  se(boolTeste == True) entao {
+  	escreva(teste1).
+  	escreva(boolTeste).
+  } senao {
+  	escreva(teste2).
+    escreva(boolTeste).
   }
+  
+  escreva("digite um valor booleano True ou False").
+  leia(boolInput).
+
+  escreva("escrevendo booleando ").
+  escreva(boolInput).
   
   # Acabou #
 fimprog.

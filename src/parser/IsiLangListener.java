@@ -44,6 +44,16 @@ public interface IsiLangListener extends ParseTreeListener {
 	 */
 	void exitDeclara(IsiLangParser.DeclaraContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link IsiLangParser#declarab}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclarab(IsiLangParser.DeclarabContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link IsiLangParser#declarab}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclarab(IsiLangParser.DeclarabContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link IsiLangParser#texto}.
 	 * @param ctx the parse tree
 	 */

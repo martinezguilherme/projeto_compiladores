@@ -11,6 +11,7 @@ public class CommandEnquanto extends AbstractCommand {
 		this.condition = condition;
 		this.listaTrue = lt;
 	}
+	
 	@Override
 	public String generateJavaCode() {
 		// TODO Auto-generated method stub

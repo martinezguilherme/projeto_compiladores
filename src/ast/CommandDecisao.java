@@ -9,6 +9,7 @@ public class CommandDecisao extends AbstractCommand {
 	
 	public CommandDecisao(String condition, ArrayList<AbstractCommand> lt, ArrayList<AbstractCommand> lf) {
 		this.condition = condition;
+		//System.out.println("Esquema condicao: " + this.condition);
 		this.listaTrue = lt;
 		this.listaFalse = lf;
 	}

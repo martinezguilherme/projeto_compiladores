@@ -51,6 +51,11 @@ grammar IsiLang;
 		}
 	}
 
+	public String exibeInput(){
+		String leitura = ((TokenStream) _input).LT(-1).getText();
+		return (leitura.equals("True") || leitura.equals("False")? leitura.toLowerCase(): leitura);
+	}
+
 	public void variavelUti(String id){ 
 		symbolTable.varUtilizada(id);
 	 }
@@ -60,7 +65,7 @@ grammar IsiLang;
 	}
 }
 
-prog		: 'programa' (declara|texto)+ bloco 'fimprog.'
+prog		: 'programa' (declara|declarab|texto)+ bloco 'fimprog.'
 	           {  
 	           	  program.setVarTable(symbolTable);
 	           	  program.setComandos(stack.pop());   	 
@@ -68,7 +73,7 @@ prog		: 'programa' (declara|texto)+ bloco 'fimprog.'
 			;
 		
 declara    :  'declare'  ID  {
-	                  		_varName = _input.LT(-1).getText();
+	                  		_varName = exibeInput();
 	                  		_varValue = null;
 	                  		_varType = 2;
 	                  		symbol = new IsiVariable(_varName, _varValue, _varType);
@@ -81,7 +86,7 @@ declara    :  'declare'  ID  {
                     	  } 
                    (  VIR 
               	 	  ID {
-	                  		_varName = _input.LT(-1).getText();
+	                  		_varName = exibeInput();
 	                  		_varValue = null;
 	                  		_varType = 2;
 	                  		symbol = new IsiVariable(_varName, _varValue, _varType);
@@ -95,9 +100,38 @@ declara    :  'declare'  ID  {
               		)* 
               		PR
            ;
-        
+
+declarab   : 'declarab'  ID  {
+								_varName = exibeInput();
+								_varValue = null;
+								_varType = 4;
+								symbol = new IsiVariable(_varName, _varValue, _varType);
+								if (!symbolTable.exists(_varName)){
+									symbolTable.add(symbol);
+								}
+								else{
+									throw new SemanticException("Symbol "+_varName+" already declared");
+								}
+                    	    } 
+					(  VIR 
+						ID {
+								_varName = exibeInput();
+								_varValue = null;
+								_varType = 4;
+								symbol = new IsiVariable(_varName, _varValue, _varType);
+								if (!symbolTable.exists(_varName)){
+									symbolTable.add(symbol);	
+								}
+								else{
+									throw new SemanticException("Symbol "+_varName+" already declared");
+								}
+							}
+						)* 
+						PR
+           ;
+
 texto    :  'texto'  ID  {
-	                  		_varName = _input.LT(-1).getText();
+	                  		_varName = exibeInput();
 	                  		_varValue = null;
 	                  		_varType = 1;
 	                  		symbol = new IsiVariable(_varName, _varValue, _varType);
@@ -110,7 +144,7 @@ texto    :  'texto'  ID  {
                     	  } 
                    (  VIR 
               	 	  ID {
-	                  		_varName = _input.LT(-1).getText();
+	                  		_varName = exibeInput();
 	                  		_varValue = null;
 	                  		_varType = 1;
 	                  		symbol = new IsiVariable(_varName, _varValue, _varType);
@@ -143,8 +177,8 @@ cmd		:  cmdleitura
 		
 cmdleitura	: 'leia' AP
                      ID { 
-                     		verificaID(_input.LT(-1).getText());
-                     	  	_readID = _input.LT(-1).getText();
+                     		verificaID(exibeInput());
+                     	  	_readID = exibeInput();
                         } 
                      FP 
                      PR 
@@ -158,11 +192,11 @@ cmdleitura	: 'leia' AP
 cmdescrita	: 'escreva' AP 
                  		(	 TEXTO 	{
                  						_writeID = null;
-                 						_writeTEXTO = _input.LT(-1).getText();
+                 						_writeTEXTO = exibeInput();
                  				   	}
 	             		|	 ID 	{ 
-	             						verificaID(_input.LT(-1).getText());
-	                     	  			_writeID = _input.LT(-1).getText();
+	             						verificaID(exibeInput());
+	                     	  			_writeID = exibeInput();
 										variavelUti(_writeID);
 	                    			} 
                  		) 
@@ -175,23 +209,25 @@ cmdescrita	: 'escreva' AP
 			;
 			
 cmdexpr		:  ID { 
-						verificaID(_input.LT(-1).getText());
-                    	_exprID = _input.LT(-1).getText();
+						verificaID(exibeInput());
+                    	_exprID = exibeInput();
                   } 
                ATR { _exprContent = ""; } 
-               expr 
+               expr
                PR
-               {
-               	 	CommandAtribuicao cmd = new CommandAtribuicao(_exprID, _exprContent);
+               {	
+				   	CommandAtribuicao cmd;
+					cmd = new CommandAtribuicao(_exprID, _exprContent);             	 	
 					// variavelUti(_exprID);
                	 	stack.peek().add(cmd);
                }
 			;	
 			
 cmdselecao  :  'se' 	AP
-                    	expr    { _exprDecision = _input.LT(-1).getText(); }
-                    	OPREL 	{ _exprDecision += _input.LT(-1).getText(); }
-                    	expr 	{ _exprDecision += _input.LT(-1).getText(); }
+                    	expr    { _exprDecision = exibeInput(); }
+                    	OPREL 	{ _exprDecision += exibeInput(); }
+                    	expr 	{ _exprDecision += exibeInput(); }
+									
                     	FP
                'entao'  ACH 
                     	{ 
@@ -221,9 +257,9 @@ cmdselecao  :  'se' 	AP
             ;
         
 cmdenquanto : 'enquanto' AP 
-						expr 	{ _exprEnquanto = _input.LT(-1).getText(); }
-						OPREL 	{ _exprEnquanto += _input.LT(-1).getText(); }
-						expr 	{ _exprEnquanto += _input.LT(-1).getText(); }
+						expr 	{ _exprEnquanto = exibeInput(); }
+						OPREL 	{ _exprEnquanto += exibeInput(); }
+						expr 	{ _exprEnquanto += exibeInput(); }
 						FP 
 						ACH 
                     	{ 
@@ -243,50 +279,58 @@ cmdcomentario :  COMMENT {
 				 			curThread = new ArrayList<AbstractCommand>();
                    	   		stack.push(curThread);
 							listaComments = stack.pop();
-               	  			CommandComentario cmd = new CommandComentario(_input.LT(-1).getText());
+               	  			CommandComentario cmd = new CommandComentario(exibeInput());
                	  			stack.peek().add(cmd); 
 						}
 		   ;
 			
-expr		: termo 
+expr		: termo
 			  ( 
-	          		OP  { _exprContent += _input.LT(-1).getText();}
+	          		OP  { _exprContent += exibeInput();}
 	            	termo
 	          )*
 			;
 			
-termo		: fator 
+termo		: fator
 			  (
-			  		OP { _exprContent += _input.LT(-1).getText();}
+			  		OP { _exprContent += exibeInput();}
 			  		fator
 			  )*
 			;
 			
 fator 		: NUMBER {
-              			_exprContent += _input.LT(-1).getText();
+              			_exprContent += exibeInput();
               			IsiVariable var = (IsiVariable)symbolTable.get(_readID);
-              			var.setType(_input.LT(-1).getText());
+              			var.setType(exibeInput());
               		 }
              | ID 	 { 
-            			verificaID(_input.LT(-1).getText());
-						variavelUti(_input.LT(-1).getText());
-	                	_exprContent += _input.LT(-1).getText();
+            			verificaID(exibeInput());
+						variavelUti(exibeInput());
+	                	_exprContent += exibeInput();
                      } 
              | TEXTO {
-              			_exprContent += _input.LT(-1).getText();
+              			_exprContent += exibeInput();
               		 }
+			 | BOOL {
+				 		_exprContent += exibeInput();
+						IsiVariable var = (IsiVariable)symbolTable.get(_readID);
+						var.setType(exibeInput());
+			 }
              | AP expr FP
              ;
 			
 OPREL 	: '>' | '<' | '>=' | '<=' | '==' | '!='
       	;
       
-ID		: ([a-z]|[A-Z]) ([a-z] | [A-Z] | [0-9])*
+ID		: ([a-z]) ([a-z] | [A-Z] | [0-9])*
 		;
-	
+
 TEXTO   : DQ ([a-z] | [A-Z] | [0-9] | WS )+ DQ
 		;
-		
+
+BOOL	: 'True' | 'False'
+		;
+
 COMMENT : CM ([a-z] | [A-Z] | [0-9] | WS )+ CM
 		;
 	

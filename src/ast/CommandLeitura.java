@@ -20,10 +20,11 @@ public class CommandLeitura extends AbstractCommand {
 			str = "nextInt();";
 		} else if (var.getType() == IsiVariable.TEXT) {
 			str = "nextLine();";
+		}else if (var.getType() == IsiVariable.BOOL) {
+			str = "nextBoolean();";
 		} else {
 			str = "nextDouble();";
 		}
-		
 		return id +"= _key." + str;
 	}
 	

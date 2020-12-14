@@ -2,9 +2,10 @@ package datastructures;
 
 public class IsiVariable extends IsiSymbol {
 	
+	public static final int TEXT   = 1;
 	public static final int INT = 2;
 	public static final int DOUBLE  = 3;
-	public static final int TEXT   = 1;
+	public static final int BOOL = 4;
 	
 	private int type;
 	private String value;
@@ -20,6 +21,7 @@ public class IsiVariable extends IsiSymbol {
 	}
 
 	public void setType(String type) {
+		//System.out.println("Este eh o tipo: " + type);
 		if (this.type == INT) {
 			try {
 				System.out.println(type);
@@ -54,12 +56,14 @@ public class IsiVariable extends IsiSymbol {
        else if(type == TEXT) {
     	   str = "String ";
        }
+       else if(type == BOOL) {
+    	   str = "boolean ";
+       }
        else {
     	   str = "double ";
        }
        return str + " "+super.name+";";
 	}
-	
 	
 
 }
