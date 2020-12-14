@@ -13,6 +13,7 @@ grammar IsiLang;
 	import ast.CommandDecisao;
 	import ast.CommandEnquanto;
 	import ast.CommandComentario;
+	import ast.CommandTernario;
 	import java.util.ArrayList;
 	import java.util.Stack;
 }
@@ -173,6 +174,7 @@ cmd		:  cmdleitura
  		|  cmdselecao
  		|  cmdenquanto
  		|  cmdcomentario
+		|  cmdternario
 		;
 		
 cmdleitura	: 'leia' AP
@@ -255,7 +257,22 @@ cmdselecao  :  'se' 	AP
                    	stack.peek().add(cmd);
                }
             ;
-        
+
+cmdternario : expr  { _exprDecision = exibeInput(); }
+			  OPREL { _exprDecision += exibeInput(); }
+			  expr 	{ _exprDecision += exibeInput(); }
+			  '?'
+			  expr
+			  ':'
+			  expr
+			  {
+				  	CommandTernario cmd;
+					cmd = new CommandTernario ("condicao", "expr1", "expr2");   
+					stack.peek().add(cmd);
+			  }
+			  PR
+			;
+
 cmdenquanto : 'enquanto' AP 
 						expr 	{ _exprEnquanto = exibeInput(); }
 						OPREL 	{ _exprEnquanto += exibeInput(); }

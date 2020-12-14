@@ -12,6 +12,8 @@ programa
   escreva("digite o valor de b ").
   leia(b).
   
+  "teste" == "teste" ? "teste" : "teste".
+
   a := 1 + 2 * 3 / b.
   
   # Aqui tem um comando de decisao #

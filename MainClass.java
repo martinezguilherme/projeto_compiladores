@@ -16,6 +16,7 @@ public class MainClass{
       a = _key.nextInt();
       System.out.println("digite o valor de b ");
       b = _key.nextInt();
+      condicao?expr1:expr2;
       a = 1+2*3/b;
       // Aqui tem um comando de decisao 
       if (a>b) {
