@@ -12,6 +12,7 @@ package parser;
 	import ast.CommandAtribuicao;
 	import ast.CommandDecisao;
 	import ast.CommandEnquanto;
+	import ast.CommandComentario;
 	import java.util.ArrayList;
 	import java.util.Stack;
 
@@ -122,6 +123,16 @@ public interface IsiLangListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCmdenquanto(IsiLangParser.CmdenquantoContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link IsiLangParser#cmdcomentario}.
+	 * @param ctx the parse tree
+	 */
+	void enterCmdcomentario(IsiLangParser.CmdcomentarioContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link IsiLangParser#cmdcomentario}.
+	 * @param ctx the parse tree
+	 */
+	void exitCmdcomentario(IsiLangParser.CmdcomentarioContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link IsiLangParser#expr}.
 	 * @param ctx the parse tree

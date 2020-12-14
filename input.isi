@@ -1,7 +1,9 @@
 programa
-
+  
   declare a, b, c, d.
   texto palavra, bota.
+
+  # Comentarios 123 #
 
   leia(bota).
   leia(b).
@@ -12,6 +14,7 @@ programa
   bota := "ovo".
   a := 1 + 2 * 3 / b. 
   
+  # Aqui tem um comando de decisao #
   se ( a > b ) entao {
      escreva (a).
   }
@@ -22,5 +25,6 @@ programa
   enquanto ( a > b) {
   	 escreva ("a").
   }
-
+  
+  # Acabou #
 fimprog.

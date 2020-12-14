@@ -8,12 +8,14 @@ int  b;
 int  c;
 int  d;
 String  bota;
+// Comentarios 123 
 bota= _key.nextLine();
 b= _key.nextInt();
 palavra= _key.nextLine();
 a= _key.nextInt();
 bota = "ovo";
 a = 1+2*3/b;
+// Aqui tem um comando de decisao 
 if (a>b) {
 System.out.println(a);
 } else {
@@ -23,5 +25,6 @@ System.out.println("b");
 while (a>b) {
 System.out.println("a");
 }
+// Acabou 
   }
 }

@@ -12,6 +12,7 @@ grammar IsiLang;
 	import ast.CommandAtribuicao;
 	import ast.CommandDecisao;
 	import ast.CommandEnquanto;
+	import ast.CommandComentario;
 	import java.util.ArrayList;
 	import java.util.Stack;
 }
@@ -33,6 +34,8 @@ grammar IsiLang;
 	private String _exprContent;
 	private String _exprDecision;
 	private String _exprEnquanto;
+	private String _exprComentario;
+	private ArrayList<AbstractCommand> listaComments;
 	private ArrayList<AbstractCommand> listaTrue;
 	private ArrayList<AbstractCommand> listaFalse;
 	
@@ -131,6 +134,7 @@ cmd		:  cmdleitura
  		|  cmdexpr
  		|  cmdselecao
  		|  cmdenquanto
+ 		|  cmdcomentario
 		;
 		
 cmdleitura	: 'leia' AP
@@ -227,6 +231,15 @@ cmdenquanto : 'enquanto' AP
                     	} 
 			;
 			
+cmdcomentario :  COMMENT {
+				 			curThread = new ArrayList<AbstractCommand>();
+                   	   		stack.push(curThread);
+							listaComments = stack.pop();
+               	  			CommandComentario cmd = new CommandComentario(_input.LT(-1).getText());
+               	  			stack.peek().add(cmd); 
+						}
+		   ;
+			
 expr		: termo 
 			  ( 
 	          		OP  { _exprContent += _input.LT(-1).getText();}
@@ -263,6 +276,9 @@ ID		: ([a-z]|[A-Z]) ([a-z] | [A-Z] | [0-9])*
 		;
 	
 TEXTO   : DQ ([a-z] | [A-Z] | [0-9] | WS )+ DQ
+		;
+		
+COMMENT : CM ([a-z] | [A-Z] | [0-9] | WS )+ CM
 		;
 	
 NUMBER	: [0-9]+ ('.' [0-9]+)?
@@ -308,4 +324,10 @@ DIV : '/'
     ;
 
 SUB : '-'
+	;
+
+CM  : '#'
+	;
+	
+DP  : ':'
 	;

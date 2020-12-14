@@ -12,6 +12,7 @@ package parser;
 	import ast.CommandAtribuicao;
 	import ast.CommandDecisao;
 	import ast.CommandEnquanto;
+	import ast.CommandComentario;
 	import java.util.ArrayList;
 	import java.util.Stack;
 
@@ -146,6 +147,18 @@ public class IsiLangBaseListener implements IsiLangListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCmdenquanto(IsiLangParser.CmdenquantoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCmdcomentario(IsiLangParser.CmdcomentarioContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCmdcomentario(IsiLangParser.CmdcomentarioContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
