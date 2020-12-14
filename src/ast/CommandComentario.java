@@ -13,7 +13,7 @@ public class CommandComentario extends AbstractCommand{
 	@Override
 	public String generateJavaCode() {
 		StringBuilder str = new StringBuilder();
-		str.append("//");
+		str.append("      //");
 		str.append(comentario.substring(1, comentario.length() -1));
 		return str.toString();
 	}

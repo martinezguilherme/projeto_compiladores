@@ -67,62 +67,64 @@ prog		: 'programa' (declara|texto)+ bloco 'fimprog.'
 	           } 
 			;
 		
-declara    :  'declare'  ID  {
-	                  		_varName = _input.LT(-1).getText();
-	                  		_varValue = null;
-	                  		_varType = 2;
-	                  		symbol = new IsiVariable(_varName, _varValue, _varType);
-	                  		if (!symbolTable.exists(_varName)){
-	                     		symbolTable.add(symbol);	
-	                  		}
-	                  		else{
-	                  	 		throw new SemanticException("Symbol "+_varName+" already declared");
-	                  	  	}
-                    	  } 
-                   (  VIR 
-              	 	  ID {
-	                  		_varName = _input.LT(-1).getText();
-	                  		_varValue = null;
-	                  		_varType = 2;
-	                  		symbol = new IsiVariable(_varName, _varValue, _varType);
-	                  		if (!symbolTable.exists(_varName)){
-	                     		symbolTable.add(symbol);	
-	                  		}
-	                  		else{
-	                  	 		throw new SemanticException("Symbol "+_varName+" already declared");
-	                  		}
-                     	  }
-              		)* 
-              		PR
+declara    :  'declare'  
+			  ID  {
+	                 _varName = _input.LT(-1).getText();
+	                 _varValue = null;
+	                 _varType = 2;
+	                 symbol = new IsiVariable(_varName, _varValue, _varType);
+	                 if (!symbolTable.exists(_varName)){
+	                 	symbolTable.add(symbol);	
+	                 }
+	                 else{
+	                 	throw new SemanticException("Symbol "+_varName+" already declared");
+	                 }
+                  } 
+              (VIR 
+               ID  {
+	                  _varName = _input.LT(-1).getText();
+	                  _varValue = null;
+	                  _varType = 2;
+	                  symbol = new IsiVariable(_varName, _varValue, _varType);
+	                  if (!symbolTable.exists(_varName)){
+	                  	symbolTable.add(symbol);	
+	                  }
+	                  else{
+	                  	throw new SemanticException("Symbol "+_varName+" already declared");
+	                  }
+                   }
+              )* 
+              PR
            ;
         
-texto    :  'texto'  ID  {
-	                  		_varName = _input.LT(-1).getText();
-	                  		_varValue = null;
-	                  		_varType = 1;
-	                  		symbol = new IsiVariable(_varName, _varValue, _varType);
-	                  		if (!symbolTable.exists(_varName)){
-	                     		symbolTable.add(symbol);	
-	                  		}
-	                  		else{
-	                  	 		throw new SemanticException("Symbol "+_varName+" already declared");
-	                  	  	}
-                    	  } 
-                   (  VIR 
-              	 	  ID {
-	                  		_varName = _input.LT(-1).getText();
-	                  		_varValue = null;
-	                  		_varType = 1;
-	                  		symbol = new IsiVariable(_varName, _varValue, _varType);
-	                  		if (!symbolTable.exists(_varName)){
-	                     		symbolTable.add(symbol);	
-	                  		}
-	                  		else{
-	                  	 		throw new SemanticException("Symbol "+_varName+" already declared");
-	                  		}
-                     	  }
-              		)* 
-              		PR
+texto    :  'texto'
+			ID  {
+	               _varName = _input.LT(-1).getText();
+	               _varValue = null;
+	               _varType = 1;
+	               symbol = new IsiVariable(_varName, _varValue, _varType);
+	               if (!symbolTable.exists(_varName)){
+	                 symbolTable.add(symbol);	
+	               }
+	               else{
+	                 throw new SemanticException("Symbol "+_varName+" already declared");
+	               }
+                } 
+            (VIR 
+             ID  {
+	                _varName = _input.LT(-1).getText();
+	                _varValue = null;
+	                _varType = 1;
+	                symbol = new IsiVariable(_varName, _varValue, _varType);
+	                if (!symbolTable.exists(_varName)){
+	                	symbolTable.add(symbol);	
+	                }
+	                else{
+	                	throw new SemanticException("Symbol "+_varName+" already declared");
+	                }
+                 }
+            )* 
+            PR
            ;
 
 bloco	: { 
@@ -148,11 +150,11 @@ cmdleitura	: 'leia' AP
                         } 
                      FP 
                      PR 
-              {
-              	IsiVariable var = (IsiVariable)symbolTable.get(_readID);
-              	CommandLeitura cmd = new CommandLeitura(_readID, var);
-              	stack.peek().add(cmd);
-              }   
+                     {
+		              	 IsiVariable var = (IsiVariable)symbolTable.get(_readID);
+		              	 CommandLeitura cmd = new CommandLeitura(_readID, var);
+		              	 stack.peek().add(cmd);
+		             }   
 			;
 			
 cmdescrita	: 'escreva' AP 
@@ -175,8 +177,8 @@ cmdescrita	: 'escreva' AP
 			;
 			
 cmdexpr		:  ID { 
-						verificaID(_input.LT(-1).getText());
-                    	_exprID = _input.LT(-1).getText();
+				     verificaID(_input.LT(-1).getText());
+                     _exprID = _input.LT(-1).getText();
                   } 
                ATR { _exprContent = ""; } 
                expr 
@@ -245,8 +247,8 @@ cmdcomentario :  COMMENT {
 							listaComments = stack.pop();
                	  			CommandComentario cmd = new CommandComentario(_input.LT(-1).getText());
                	  			stack.peek().add(cmd); 
-						}
-		   ;
+						 }
+		      ;
 			
 expr		: termo 
 			  ( 
@@ -336,7 +338,4 @@ SUB : '-'
 	;
 
 CM  : '#'
-	;
-	
-DP  : ':'
 	;

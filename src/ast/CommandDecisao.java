@@ -17,21 +17,23 @@ public class CommandDecisao extends AbstractCommand {
 	public String generateJavaCode() {
 		// TODO Auto-generated method stub
 		StringBuilder str = new StringBuilder();
-		str.append("if ("+condition+") {\n");
+		str.append("      if ("+condition+") {\n");
 		
 		for (AbstractCommand cmd: listaTrue) {
-			str.append(cmd.generateJavaCode());
+			str.append("   " + cmd.generateJavaCode());
 		}
 		
-		str.append("\n}");
+		str.append("\n      }");
 		
 		if (listaFalse != null) {
 			str.append(" else {\n");
 			for (AbstractCommand cmd: listaFalse) {
-				str.append(cmd.generateJavaCode());
+				str.append("   " + cmd.generateJavaCode());
 			}
-			str.append("\n}\n");
+			str.append("\n      }");
 		}
+		
+		str.append("\n");
 		
 		return str.toString();
 	}

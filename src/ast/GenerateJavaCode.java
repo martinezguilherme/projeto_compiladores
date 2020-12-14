@@ -18,8 +18,8 @@ public class GenerateJavaCode {
 		
 		str.append("import java.util.Scanner;\n");
 		str.append("public class MainClass{ \n");
-		str.append("  public static void main(String args[]){\n ");
-		str.append("      Scanner _key = new Scanner(System.in);\n");
+		str.append("   public static void main(String args[]){\n ");
+		str.append("     Scanner _key = new Scanner(System.in);\n");
 		
 		for (IsiSymbol symbol: varTable.getAll()) {
 			if(symbol.qtdUsos == 0)
@@ -28,12 +28,12 @@ public class GenerateJavaCode {
 
 			str.append(symbol.generateJavaCode()+"\n");
 		}
-		
+		str.append("\n");
 		for (AbstractCommand command: comandos) {
 			str.append(command.generateJavaCode()+"\n");
 		}
 		
-		str.append("  }\n");
+		str.append("   }\n");
 		str.append("}\n");
 		
 		try {

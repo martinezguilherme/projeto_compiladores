@@ -36,7 +36,7 @@ public class IsiLangParser extends Parser {
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
 		T__9=10, OPREL=11, ID=12, TEXTO=13, COMMENT=14, NUMBER=15, WS=16, OP=17, 
 		AP=18, FP=19, PR=20, DQ=21, ATR=22, VIR=23, ACH=24, FCH=25, SOM=26, MUL=27, 
-		DIV=28, SUB=29, CM=30, DP=31;
+		DIV=28, SUB=29, CM=30;
 	public static final int
 		RULE_prog = 0, RULE_declara = 1, RULE_texto = 2, RULE_bloco = 3, RULE_cmd = 4, 
 		RULE_cmdleitura = 5, RULE_cmdescrita = 6, RULE_cmdexpr = 7, RULE_cmdselecao = 8, 
@@ -52,12 +52,12 @@ public class IsiLangParser extends Parser {
 		null, "'programa'", "'fimprog.'", "'declare'", "'texto'", "'leia'", "'escreva'", 
 		"'se'", "'entao'", "'senao'", "'enquanto'", null, null, null, null, null, 
 		null, null, "'('", "')'", "'.'", "'\"'", "':='", "','", "'{'", "'}'", 
-		"'+'", "'*'", "'/'", "'-'", "'#'", "':'"
+		"'+'", "'*'", "'/'", "'-'", "'#'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, null, null, null, null, null, null, null, null, null, null, "OPREL", 
 		"ID", "TEXTO", "COMMENT", "NUMBER", "WS", "OP", "AP", "FP", "PR", "DQ", 
-		"ATR", "VIR", "ACH", "FCH", "SOM", "MUL", "DIV", "SUB", "CM", "DP"
+		"ATR", "VIR", "ACH", "FCH", "SOM", "MUL", "DIV", "SUB", "CM"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -274,17 +274,17 @@ public class IsiLangParser extends Parser {
 			setState(40);
 			match(ID);
 
-				                  		_varName = _input.LT(-1).getText();
-				                  		_varValue = null;
-				                  		_varType = 2;
-				                  		symbol = new IsiVariable(_varName, _varValue, _varType);
-				                  		if (!symbolTable.exists(_varName)){
-				                     		symbolTable.add(symbol);	
-				                  		}
-				                  		else{
-				                  	 		throw new SemanticException("Symbol "+_varName+" already declared");
-				                  	  	}
-			                    	  
+				                 _varName = _input.LT(-1).getText();
+				                 _varValue = null;
+				                 _varType = 2;
+				                 symbol = new IsiVariable(_varName, _varValue, _varType);
+				                 if (!symbolTable.exists(_varName)){
+				                 	symbolTable.add(symbol);	
+				                 }
+				                 else{
+				                 	throw new SemanticException("Symbol "+_varName+" already declared");
+				                 }
+			                  
 			setState(47);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -296,17 +296,17 @@ public class IsiLangParser extends Parser {
 				setState(43);
 				match(ID);
 
-					                  		_varName = _input.LT(-1).getText();
-					                  		_varValue = null;
-					                  		_varType = 2;
-					                  		symbol = new IsiVariable(_varName, _varValue, _varType);
-					                  		if (!symbolTable.exists(_varName)){
-					                     		symbolTable.add(symbol);	
-					                  		}
-					                  		else{
-					                  	 		throw new SemanticException("Symbol "+_varName+" already declared");
-					                  		}
-				                     	  
+					                  _varName = _input.LT(-1).getText();
+					                  _varValue = null;
+					                  _varType = 2;
+					                  symbol = new IsiVariable(_varName, _varValue, _varType);
+					                  if (!symbolTable.exists(_varName)){
+					                  	symbolTable.add(symbol);	
+					                  }
+					                  else{
+					                  	throw new SemanticException("Symbol "+_varName+" already declared");
+					                  }
+				                   
 				}
 				}
 				setState(49);
@@ -364,17 +364,17 @@ public class IsiLangParser extends Parser {
 			setState(53);
 			match(ID);
 
-				                  		_varName = _input.LT(-1).getText();
-				                  		_varValue = null;
-				                  		_varType = 1;
-				                  		symbol = new IsiVariable(_varName, _varValue, _varType);
-				                  		if (!symbolTable.exists(_varName)){
-				                     		symbolTable.add(symbol);	
-				                  		}
-				                  		else{
-				                  	 		throw new SemanticException("Symbol "+_varName+" already declared");
-				                  	  	}
-			                    	  
+				               _varName = _input.LT(-1).getText();
+				               _varValue = null;
+				               _varType = 1;
+				               symbol = new IsiVariable(_varName, _varValue, _varType);
+				               if (!symbolTable.exists(_varName)){
+				                 symbolTable.add(symbol);	
+				               }
+				               else{
+				                 throw new SemanticException("Symbol "+_varName+" already declared");
+				               }
+			                
 			setState(60);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -386,17 +386,17 @@ public class IsiLangParser extends Parser {
 				setState(56);
 				match(ID);
 
-					                  		_varName = _input.LT(-1).getText();
-					                  		_varValue = null;
-					                  		_varType = 1;
-					                  		symbol = new IsiVariable(_varName, _varValue, _varType);
-					                  		if (!symbolTable.exists(_varName)){
-					                     		symbolTable.add(symbol);	
-					                  		}
-					                  		else{
-					                  	 		throw new SemanticException("Symbol "+_varName+" already declared");
-					                  		}
-				                     	  
+					                _varName = _input.LT(-1).getText();
+					                _varValue = null;
+					                _varType = 1;
+					                symbol = new IsiVariable(_varName, _varValue, _varType);
+					                if (!symbolTable.exists(_varName)){
+					                	symbolTable.add(symbol);	
+					                }
+					                else{
+					                	throw new SemanticException("Symbol "+_varName+" already declared");
+					                }
+				                 
 				}
 				}
 				setState(62);
@@ -614,10 +614,10 @@ public class IsiLangParser extends Parser {
 			setState(84);
 			match(PR);
 
-			              	IsiVariable var = (IsiVariable)symbolTable.get(_readID);
-			              	CommandLeitura cmd = new CommandLeitura(_readID, var);
-			              	stack.peek().add(cmd);
-			              
+					              	 IsiVariable var = (IsiVariable)symbolTable.get(_readID);
+					              	 CommandLeitura cmd = new CommandLeitura(_readID, var);
+					              	 stack.peek().add(cmd);
+					             
 			}
 		}
 		catch (RecognitionException re) {
@@ -739,8 +739,8 @@ public class IsiLangParser extends Parser {
 			setState(99);
 			match(ID);
 			 
-									verificaID(_input.LT(-1).getText());
-			                    	_exprID = _input.LT(-1).getText();
+							     verificaID(_input.LT(-1).getText());
+			                     _exprID = _input.LT(-1).getText();
 			                  
 			setState(101);
 			match(ATR);
@@ -1032,7 +1032,7 @@ public class IsiLangParser extends Parser {
 										listaComments = stack.pop();
 			               	  			CommandComentario cmd = new CommandComentario(_input.LT(-1).getText());
 			               	  			stack.peek().add(cmd); 
-									
+									 
 			}
 		}
 		catch (RecognitionException re) {
@@ -1267,7 +1267,7 @@ public class IsiLangParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3!\u00c4\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3 \u00c4\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\3\2\3\2\3\2\6\2\"\n\2\r\2\16\2"+
 		"#\3\2\3\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\7\3\60\n\3\f\3\16\3\63\13\3"+
