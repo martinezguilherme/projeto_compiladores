@@ -116,6 +116,8 @@ public class IsiLangLexer extends Lexer {
 		private String _exprDecision;
 		private String _exprEnquanto;
 		private String _exprComentario;
+		private String _exprOpcaoTrue;
+		private String _exprOpcaoFalse;
 		private ArrayList<AbstractCommand> listaComments;
 		private ArrayList<AbstractCommand> listaTrue;
 		private ArrayList<AbstractCommand> listaFalse;

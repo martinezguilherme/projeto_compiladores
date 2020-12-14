@@ -36,6 +36,8 @@ grammar IsiLang;
 	private String _exprDecision;
 	private String _exprEnquanto;
 	private String _exprComentario;
+	private String _exprOpcaoTrue;
+	private String _exprOpcaoFalse;
 	private ArrayList<AbstractCommand> listaComments;
 	private ArrayList<AbstractCommand> listaTrue;
 	private ArrayList<AbstractCommand> listaFalse;
@@ -258,16 +260,21 @@ cmdselecao  :  'se' 	AP
                }
             ;
 
-cmdternario : expr  { _exprDecision = exibeInput(); }
+cmdternario : ID { 
+						verificaID(exibeInput());
+                    	_exprID = exibeInput();
+                  } 
+              ATR { _exprContent = ""; }				
+			  expr  { _exprDecision = exibeInput(); }
 			  OPREL { _exprDecision += exibeInput(); }
 			  expr 	{ _exprDecision += exibeInput(); }
 			  '?'
-			  expr
+			  expr  { _exprOpcaoTrue = exibeInput(); System.out.println("Teste dentro 1" + _exprOpcaoTrue);}
 			  ':'
-			  expr
+			  expr  { _exprOpcaoFalse = exibeInput(); System.out.println("Teste dentro 2" + _exprOpcaoFalse);}
 			  {
 				  	CommandTernario cmd;
-					cmd = new CommandTernario ("condicao", "expr1", "expr2");   
+					cmd = new CommandTernario (_exprID,_exprDecision, _exprOpcaoTrue, _exprOpcaoFalse);   
 					stack.peek().add(cmd);
 			  }
 			  PR

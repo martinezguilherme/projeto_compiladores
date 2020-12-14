@@ -1,6 +1,6 @@
 programa
   
-  declare a, b.
+  declare a, b, c.
   texto palavra, teste1, teste2.
   declarab boolTeste, boolInput.
   # Comentarios 123 #
@@ -12,11 +12,22 @@ programa
   escreva("digite o valor de b ").
   leia(b).
   
-  "teste" == "teste" ? "teste" : "teste".
+  #Operador ternario#
+  escreva(" ").
+  escreva("Se a maior que b").
+  escreva("c eh 10 caso contrario c eh 20").
+  c := a > b ? 10 : 20.
+  escreva(" ").
+  escreva("testando operador ternario").
+  escreva("c igual a").
+  escreva(c).
+
 
   a := 1 + 2 * 3 / b.
   
   # Aqui tem um comando de decisao #
+  escreva(" ").
+  escreva("Testando se senao ").
   se ( a > b ) entao {
     escreva("escrevendo a ").
     escreva (a).
@@ -26,13 +37,16 @@ programa
   	escreva (b).
   }
   
-   enquanto ( a > b) {
+  escreva(" ").
+  escreva("Testando enquanto ").
+  enquanto ( a > b) {
     escreva ("escrevendo a ").
 	escreva (a).
     a := a - 1.
   }
   
   #Parte de texto#
+  escreva(" ").
   escreva("digite uma palavra ").
   leia(palavra).
   leia(palavra).
@@ -44,6 +58,7 @@ programa
   escreva(palavra).
 
  #Parte do booleanos#
+  escreva(" ").
   teste1 := "Verdadeiro".
   teste2 := "Falso".
   boolTeste := True.
