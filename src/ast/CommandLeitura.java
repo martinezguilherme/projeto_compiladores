@@ -25,7 +25,8 @@ public class CommandLeitura extends AbstractCommand {
 		} else {
 			str = "nextDouble();";
 		}
-		return id +"= _key." + str;
+
+		return "      " + id + " = _key." + str;
 	}
 	
 	@Override

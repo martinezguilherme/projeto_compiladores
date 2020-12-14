@@ -62,7 +62,7 @@ public class IsiVariable extends IsiSymbol {
        else {
     	   str = "double ";
        }
-       return str + " "+super.name+";";
+       return "      " + str + " "+super.name+";";
 	}
 	
 

@@ -13,7 +13,7 @@ public class CommandEscrita extends AbstractCommand {
 	@Override
 	public String generateJavaCode() {
 		String str = (id == null)? texto : id; 
-		return "System.out.println("+str+");";
+		return "      System.out.println("+str+");";
 	}
 	
 	@Override

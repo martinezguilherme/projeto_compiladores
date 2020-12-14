@@ -182,11 +182,11 @@ cmdleitura	: 'leia' AP
                         } 
                      FP 
                      PR 
-              {
-              	IsiVariable var = (IsiVariable)symbolTable.get(_readID);
-              	CommandLeitura cmd = new CommandLeitura(_readID, var);
-              	stack.peek().add(cmd);
-              }   
+                     {
+		              	 IsiVariable var = (IsiVariable)symbolTable.get(_readID);
+		              	 CommandLeitura cmd = new CommandLeitura(_readID, var);
+		              	 stack.peek().add(cmd);
+		             }   
 			;
 			
 cmdescrita	: 'escreva' AP 
@@ -281,8 +281,8 @@ cmdcomentario :  COMMENT {
 							listaComments = stack.pop();
                	  			CommandComentario cmd = new CommandComentario(exibeInput());
                	  			stack.peek().add(cmd); 
-						}
-		   ;
+						 }
+		      ;
 			
 expr		: termo
 			  ( 
@@ -380,7 +380,4 @@ SUB : '-'
 	;
 
 CM  : '#'
-	;
-	
-DP  : ':'
 	;

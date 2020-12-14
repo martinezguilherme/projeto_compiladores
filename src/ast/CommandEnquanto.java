@@ -16,11 +16,11 @@ public class CommandEnquanto extends AbstractCommand {
 	public String generateJavaCode() {
 		// TODO Auto-generated method stub
 		StringBuilder str = new StringBuilder();
-		str.append("while ("+condition+") {\n");
+		str.append("      while ("+condition+") {\n");
 		for (AbstractCommand cmd: listaTrue) {
-			str.append(cmd.generateJavaCode());
+			str.append("   " + cmd.generateJavaCode()+"\n");
 		}
-		str.append("\n}");
+		str.append("      }\n");
 		return str.toString();
 	}
 	@Override

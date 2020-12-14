@@ -36,7 +36,7 @@ public class IsiLangParser extends Parser {
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
 		T__9=10, T__10=11, OPREL=12, ID=13, TEXTO=14, BOOL=15, COMMENT=16, NUMBER=17, 
 		WS=18, OP=19, AP=20, FP=21, PR=22, DQ=23, ATR=24, VIR=25, ACH=26, FCH=27, 
-		SOM=28, MUL=29, DIV=30, SUB=31, CM=32, DP=33;
+		SOM=28, MUL=29, DIV=30, SUB=31, CM=32;
 	public static final int
 		RULE_prog = 0, RULE_declara = 1, RULE_declarab = 2, RULE_texto = 3, RULE_bloco = 4, 
 		RULE_cmd = 5, RULE_cmdleitura = 6, RULE_cmdescrita = 7, RULE_cmdexpr = 8, 
@@ -52,13 +52,13 @@ public class IsiLangParser extends Parser {
 		null, "'programa'", "'fimprog.'", "'declare'", "'declarab'", "'texto'", 
 		"'leia'", "'escreva'", "'se'", "'entao'", "'senao'", "'enquanto'", null, 
 		null, null, null, null, null, null, null, "'('", "')'", "'.'", "'\"'", 
-		"':='", "','", "'{'", "'}'", "'+'", "'*'", "'/'", "'-'", "'#'", "':'"
+		"':='", "','", "'{'", "'}'", "'+'", "'*'", "'/'", "'-'", "'#'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, null, null, null, null, null, null, null, null, null, null, null, 
 		"OPREL", "ID", "TEXTO", "BOOL", "COMMENT", "NUMBER", "WS", "OP", "AP", 
 		"FP", "PR", "DQ", "ATR", "VIR", "ACH", "FCH", "SOM", "MUL", "DIV", "SUB", 
-		"CM", "DP"
+		"CM"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -722,10 +722,10 @@ public class IsiLangParser extends Parser {
 			setState(100);
 			match(PR);
 
-			              	IsiVariable var = (IsiVariable)symbolTable.get(_readID);
-			              	CommandLeitura cmd = new CommandLeitura(_readID, var);
-			              	stack.peek().add(cmd);
-			              
+					              	 IsiVariable var = (IsiVariable)symbolTable.get(_readID);
+					              	 CommandLeitura cmd = new CommandLeitura(_readID, var);
+					              	 stack.peek().add(cmd);
+					             
 			}
 		}
 		catch (RecognitionException re) {
@@ -1141,7 +1141,7 @@ public class IsiLangParser extends Parser {
 										listaComments = stack.pop();
 			               	  			CommandComentario cmd = new CommandComentario(exibeInput());
 			               	  			stack.peek().add(cmd); 
-									
+									 
 			}
 		}
 		catch (RecognitionException re) {
@@ -1389,7 +1389,7 @@ public class IsiLangParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3#\u00d6\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\"\u00d6\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\3\2\3\2\3\2\3\2\6\2"+
 		"%\n\2\r\2\16\2&\3\2\3\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\7\3\63\n\3\f\3"+
