@@ -1,17 +1,14 @@
 programa
   
-  declare a, b, c, d.
-  texto palavra, bota.
+  declare a, b.
+  texto palavra.
 
   # Comentarios 123 #
 
-  leia(bota).
   leia(b).
-  leia(palavra).
   leia(a).
+  leia(palavra).
 
-  
-  bota := "ovo".
   a := 1 + 2 * 3 / b. 
   
   # Aqui tem um comando de decisao #
@@ -19,8 +16,12 @@ programa
      escreva (a).
   }
   senao {
-     escreva ("b").
+  	 escreva (b).
   }
+  
+  
+  palavra := "abracadabra".
+  escreva(palavra).
   
   enquanto ( a > b) {
   	 escreva ("a").

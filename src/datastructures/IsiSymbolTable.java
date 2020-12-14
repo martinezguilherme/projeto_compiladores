@@ -16,6 +16,12 @@ public class IsiSymbolTable {
 	public void add(IsiSymbol symbol) {
 		map.put(symbol.getName(), symbol);
 	}
+
+	public void varUtilizada(String sybomlName){
+		IsiSymbol varAtual = get(sybomlName);
+		varAtual.variavelUtilizada();
+		map.put(sybomlName, varAtual);
+	}
 	
 	public boolean exists(String symbolName) {
 		return map.get(symbolName) != null;

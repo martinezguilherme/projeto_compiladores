@@ -5,23 +5,20 @@ public class MainClass{
 String  palavra;
 int  a;
 int  b;
-int  c;
-int  d;
-String  bota;
 // Comentarios 123 
-bota= _key.nextLine();
 b= _key.nextInt();
-palavra= _key.nextLine();
 a= _key.nextInt();
-bota = "ovo";
+palavra= _key.nextLine();
 a = 1+2*3/b;
 // Aqui tem um comando de decisao 
 if (a>b) {
 System.out.println(a);
 } else {
-System.out.println("b");
+System.out.println(b);
 }
 
+palavra = "abracadabra";
+System.out.println(palavra);
 while (a>b) {
 System.out.println("a");
 }

@@ -12,25 +12,30 @@ public class CommandDecisao extends AbstractCommand {
 		this.listaTrue = lt;
 		this.listaFalse = lf;
 	}
+	
 	@Override
 	public String generateJavaCode() {
 		// TODO Auto-generated method stub
 		StringBuilder str = new StringBuilder();
 		str.append("if ("+condition+") {\n");
+		
 		for (AbstractCommand cmd: listaTrue) {
 			str.append(cmd.generateJavaCode());
 		}
+		
 		str.append("\n}");
-		if (listaFalse.size() > 0) {
+		
+		if (listaFalse != null) {
 			str.append(" else {\n");
 			for (AbstractCommand cmd: listaFalse) {
 				str.append(cmd.generateJavaCode());
 			}
 			str.append("\n}\n");
-		
 		}
+		
 		return str.toString();
 	}
+	
 	@Override
 	public String toString() {
 		return "CommandDecisao [condition=" + condition + ", listaTrue=" + listaTrue + ", listaFalse=" + listaFalse

@@ -50,6 +50,10 @@ grammar IsiLang;
 			System.out.println(c);
 		}
 	}
+
+	public void variavelUti(String id){ 
+		symbolTable.varUtilizada(id);
+	 }
 	
 	public void generateCode(){
 		program.generateTarget();
@@ -159,6 +163,7 @@ cmdescrita	: 'escreva' AP
 	             		|	 ID 	{ 
 	             						verificaID(_input.LT(-1).getText());
 	                     	  			_writeID = _input.LT(-1).getText();
+										variavelUti(_writeID);
 	                    			} 
                  		) 
                  		FP 
@@ -178,14 +183,15 @@ cmdexpr		:  ID {
                PR
                {
                	 	CommandAtribuicao cmd = new CommandAtribuicao(_exprID, _exprContent);
+					// variavelUti(_exprID);
                	 	stack.peek().add(cmd);
                }
 			;	
 			
 cmdselecao  :  'se' 	AP
                     	expr    { _exprDecision = _input.LT(-1).getText(); }
-                    	OPREL { _exprDecision += _input.LT(-1).getText(); }
-                    	expr { _exprDecision += _input.LT(-1).getText(); }
+                    	OPREL 	{ _exprDecision += _input.LT(-1).getText(); }
+                    	expr 	{ _exprDecision += _input.LT(-1).getText(); }
                     	FP
                'entao'  ACH 
                     	{ 
@@ -206,16 +212,18 @@ cmdselecao  :  'se' 	AP
                    		FCH
                    		{
                    			listaFalse = stack.pop();
-                   			CommandDecisao cmd = new CommandDecisao(_exprDecision, listaTrue, listaFalse);
-                   			stack.peek().add(cmd);
                    		}
                )?
+               {
+               		CommandDecisao cmd = new CommandDecisao(_exprDecision, listaTrue, listaFalse);
+                   	stack.peek().add(cmd);
+               }
             ;
         
 cmdenquanto : 'enquanto' AP 
-						expr { _exprEnquanto = _input.LT(-1).getText(); }
-						OPREL { _exprEnquanto += _input.LT(-1).getText(); }
-						expr { _exprEnquanto += _input.LT(-1).getText(); }
+						expr 	{ _exprEnquanto = _input.LT(-1).getText(); }
+						OPREL 	{ _exprEnquanto += _input.LT(-1).getText(); }
+						expr 	{ _exprEnquanto += _input.LT(-1).getText(); }
 						FP 
 						ACH 
                     	{ 
@@ -261,6 +269,7 @@ fator 		: NUMBER {
               		 }
              | ID 	 { 
             			verificaID(_input.LT(-1).getText());
+						variavelUti(_input.LT(-1).getText());
 	                	_exprContent += _input.LT(-1).getText();
                      } 
              | TEXTO {

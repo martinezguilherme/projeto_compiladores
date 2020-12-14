@@ -129,6 +129,10 @@ public class IsiLangLexer extends Lexer {
 				System.out.println(c);
 			}
 		}
+
+		public void variavelUti(String id){ 
+			symbolTable.varUtilizada(id);
+		 }
 		
 		public void generateCode(){
 			program.generateTarget();
