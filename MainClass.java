@@ -3,22 +3,28 @@ public class MainClass{
    public static void main(String args[]){
       Scanner _key = new Scanner(System.in);
       String  palavra;
-      double  a;
+      int  a;
       int  b;
       int  c;
+      int  d;
       String  teste2;
       String  teste1;
       boolean  boolTeste;
 
       //Parte do numeros
       System.out.println("digite o valor de a ");
-      a = 5.5;
+      d = 2;
+      a = d;
       System.out.println("digite o valor de b ");
       b = _key.nextInt();
-      //Operador ternario
-      c = a>b?10:20;
-      System.out.println(c);
-      a = a*a;
+      //Parte de texto
+      System.out.println("digite uma palavra ");
+      palavra = _key.nextLine();
+      System.out.println("palavra escrita ");
+      System.out.println(palavra);
+      palavra = "abracadabra";
+      System.out.println("palavra alterada ");
+      System.out.println(palavra);
       //comando de decisao
       if (a>b) {
          System.out.println(a);
@@ -29,16 +35,12 @@ public class MainClass{
       //comando de enquanto
       while (a>b) {
          a = a-1;
+         System.out.println(a);
       }
 
-      //Parte de texto
-      System.out.println("digite uma palavra ");
-      palavra = _key.nextLine();
-      System.out.println("palavra escrita ");
-      System.out.println(palavra);
-      palavra = "abracadabra";
-      System.out.println("palavra alterada ");
-      System.out.println(palavra);
+      //Operador ternario
+      c = a>b?10:20;
+      System.out.println(c);
       //Parte do booleanos
       teste1 = "Verdadeiro";
       teste2 = "Falso";

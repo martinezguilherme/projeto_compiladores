@@ -24,6 +24,9 @@ public class GenerateJavaCode {
 		for (IsiSymbol symbol: varTable.getAll()) {
 			if(symbol.qtdUsos == 0)
 				throw new SemanticException("Variável '"+ symbol.getName() + "' declarada mas não utilizada");
+			if(symbol.varAtribuida == false){
+				throw new SemanticException("Variavel " + symbol.getName() + " utilizada mas nao foi atribuida");
+			}
 			//System.out.println("Variável não utilizada:" + symbol.getName());
 
 			str.append(symbol.generateJavaCode()+"\n");

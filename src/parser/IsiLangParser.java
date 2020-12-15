@@ -149,8 +149,12 @@ public class IsiLangParser extends Parser {
 
 		public void variavelUti(String id){ 
 			symbolTable.varUtilizada(id);
-		 }
+		}
 		
+		public void variavelAttr(String id){
+			symbolTable.varAtribuida(id);
+		}
+
 		public void generateCode(){
 			program.generateTarget();
 		}
@@ -734,6 +738,7 @@ public class IsiLangParser extends Parser {
 			match(PR);
 
 					              	 IsiVariable var = (IsiVariable)symbolTable.get(_readID);
+									 variavelAttr(_readID);
 					              	 CommandLeitura cmd = new CommandLeitura(_readID, var);
 					              	 stack.peek().add(cmd);
 					             
@@ -871,7 +876,8 @@ public class IsiLangParser extends Parser {
 			match(PR);
 				
 							   	CommandAtribuicao cmd;
-								cmd = new CommandAtribuicao(_exprID, _exprContent);             	 	
+								cmd = new CommandAtribuicao(_exprID, _exprContent); 
+								variavelAttr(_exprID);            	 	
 								// variavelUti(_exprID);
 			               	 	stack.peek().add(cmd);
 			               
@@ -1082,13 +1088,14 @@ public class IsiLangParser extends Parser {
 			match(T__10);
 			setState(171);
 			expr();
-			 _exprOpcaoTrue = exibeInput(); System.out.println("Teste dentro 1" + _exprOpcaoTrue);
+			 _exprOpcaoTrue = exibeInput();
 			setState(173);
 			match(T__11);
 			setState(174);
 			expr();
-			 _exprOpcaoFalse = exibeInput(); System.out.println("Teste dentro 2" + _exprOpcaoFalse);
+			 _exprOpcaoFalse = exibeInput();
 
+							  	variavelAttr(_exprID);
 							  	CommandTernario cmd;
 								cmd = new CommandTernario (_exprID,_exprDecision, _exprOpcaoTrue, _exprOpcaoFalse);   
 								stack.peek().add(cmd);
@@ -1413,10 +1420,8 @@ public class IsiLangParser extends Parser {
 				setState(219);
 				match(NUMBER);
 
-										System.out.println(exibeInput());
 				              			_exprContent += exibeInput();
 				              			IsiVariable var = (IsiVariable)symbolTable.get(_readID);
-										System.out.println(exibeInput());
 				              			var.setType(exibeInput());
 				              		 
 				}

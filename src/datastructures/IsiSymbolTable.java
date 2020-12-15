@@ -23,6 +23,12 @@ public class IsiSymbolTable {
 		map.put(sybomlName, varAtual);
 	}
 	
+	public void varAtribuida(String symbolName){
+		IsiSymbol varAtual = get(symbolName);
+		varAtual.variavelAtribuida();
+		map.put(symbolName, varAtual);
+	}
+	
 	public boolean exists(String symbolName) {
 		return map.get(symbolName) != null;
 	}

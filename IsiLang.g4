@@ -61,8 +61,12 @@ grammar IsiLang;
 
 	public void variavelUti(String id){ 
 		symbolTable.varUtilizada(id);
-	 }
+	}
 	
+	public void variavelAttr(String id){
+		symbolTable.varAtribuida(id);
+	}
+
 	public void generateCode(){
 		program.generateTarget();
 	}
@@ -188,6 +192,7 @@ cmdleitura	: 'leia' AP
                      PR 
                      {
 		              	 IsiVariable var = (IsiVariable)symbolTable.get(_readID);
+						 variavelAttr(_readID);
 		              	 CommandLeitura cmd = new CommandLeitura(_readID, var);
 		              	 stack.peek().add(cmd);
 		             }   
@@ -222,7 +227,8 @@ cmdexpr		:  ID {
                PR
                {	
 				   	CommandAtribuicao cmd;
-					cmd = new CommandAtribuicao(_exprID, _exprContent);             	 	
+					cmd = new CommandAtribuicao(_exprID, _exprContent); 
+					variavelAttr(_exprID);            	 	
 					// variavelUti(_exprID);
                	 	stack.peek().add(cmd);
                }
@@ -270,10 +276,11 @@ cmdternario : ID {
 			  OPREL { _exprDecision += exibeInput(); }
 			  expr 	{ _exprDecision += exibeInput(); }
 			  '?'
-			  expr  { _exprOpcaoTrue = exibeInput(); System.out.println("Teste dentro 1" + _exprOpcaoTrue);}
+			  expr  { _exprOpcaoTrue = exibeInput();}
 			  ':'
-			  expr  { _exprOpcaoFalse = exibeInput(); System.out.println("Teste dentro 2" + _exprOpcaoFalse);}
+			  expr  { _exprOpcaoFalse = exibeInput();}
 			  {
+				  	variavelAttr(_exprID);
 				  	CommandTernario cmd;
 					cmd = new CommandTernario (_exprID,_exprDecision, _exprOpcaoTrue, _exprOpcaoFalse);   
 					stack.peek().add(cmd);
@@ -324,10 +331,8 @@ termo		: fator
 			;
 			
 fator 		: NUMBER {
-						System.out.println(exibeInput());
               			_exprContent += exibeInput();
               			IsiVariable var = (IsiVariable)symbolTable.get(_readID);
-						System.out.println(exibeInput());
               			var.setType(exibeInput());
               		 }
              | ID 	 { 
