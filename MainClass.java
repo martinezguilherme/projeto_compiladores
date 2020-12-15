@@ -6,15 +6,13 @@ public class MainClass{
       int  a;
       int  b;
       int  c;
-      int  d;
       String  teste2;
       String  teste1;
       boolean  boolTeste;
 
       //Parte do numeros
       System.out.println("digite o valor de a ");
-      d = 2;
-      a = d;
+      a = 5;
       System.out.println("digite o valor de b ");
       b = _key.nextInt();
       //Parte de texto

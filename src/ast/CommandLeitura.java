@@ -15,7 +15,6 @@ public class CommandLeitura extends AbstractCommand {
 	@Override
 	public String generateJavaCode() {
 		String str;
-		System.out.println(var.getType());
 		if(var.getType() == IsiVariable.INT) {
 			str = "nextInt();";
 		} else if (var.getType() == IsiVariable.TEXT) {
@@ -31,7 +30,7 @@ public class CommandLeitura extends AbstractCommand {
 	
 	@Override
 	public String toString() {
-		return "CommandLeitura [id=" + id + " - " + var.getType() + "]";
+		return "CommandLeitura [id=" + id + ", type=" + var.getType() + "]";
 	}
 	
 }

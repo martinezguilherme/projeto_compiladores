@@ -27,8 +27,6 @@ public class GenerateJavaCode {
 			if(symbol.varAtribuida == false){
 				throw new SemanticException("Variavel " + symbol.getName() + " utilizada mas nao foi atribuida");
 			}
-			//System.out.println("Variável não utilizada:" + symbol.getName());
-
 			str.append(symbol.generateJavaCode()+"\n");
 		}
 		str.append("\n");

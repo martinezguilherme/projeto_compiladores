@@ -9,7 +9,6 @@ public class CommandAtribuicao extends AbstractCommand{
 	public CommandAtribuicao(String id, String expr) {
 		this.id = id;
 		this.expr = expr;
-		//System.out.println("Esta eh a express: " + expr);
 	}
 	@Override
 	public String generateJavaCode() {

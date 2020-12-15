@@ -21,10 +21,8 @@ public class IsiVariable extends IsiSymbol {
 	}
 
 	public void setType(String type) {
-		//System.out.println("Este eh o tipo: " + type);
 		if (this.type == INT) {
 			try {
-				System.out.println(type);
 				Integer.parseInt(type);
 				this.type = INT;
 			} catch(NumberFormatException nfe) {				
@@ -32,7 +30,6 @@ public class IsiVariable extends IsiSymbol {
 				this.type = DOUBLE;
 			}
 		}
-		System.out.println(type+" "+this.type);
 	}
 
 	public String getValue() {
